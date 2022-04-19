@@ -2,17 +2,17 @@
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
 <!------ Include the above in your HEAD tag ---------->
+
+<!-- const URL_PATTERN = /^https?:\/\/(.+)$/; -->
+
 <div>
-    <form>
+    <form #form="ngForm" (submit)="create(form)">
+        <pre>{{form.value | json}}</pre>
         <div class="container contact">
             <div class="row">
                 <div class="col-md-3">
                     <div class="contact-info">
-                        <!-- <img src="" alt="image" /> -->
                         <h2>Create your own healthy recipe!</h2>
-                        <!-- <h4>You can create your favourite recipe here and it will be stored in your profile!</h4> -->
-                        <!-- <img  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTK3BKYucUQh0J_erRVa8TutvtSpci06FQKbA&usqp=CAU">
-                    <img class="image-create-form" src="https://www.desktopbackground.org/download/360x640/2010/05/10/15208_healthy-food-wallpapers-hd-free-download-food-pictures_1920x1200_h.jpg"> -->
 
                     </div>
                 </div>
@@ -20,14 +20,35 @@
                     <div class="contact-form">
                         <div class="form-group">
                             <label class="control-label col-sm-2" for="fname">Name</label>
+
+
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="fname" placeholder="Enter First Name"
-                                    name="fname">
+                                <input type="text" class="form-control" id="name" placeholder="Enter First Name"
+                                    name="name" required minlength="3" maxlength="20" ngModel>
                             </div>
+
+                            <div class="alert alert-danger" style="width: 79%; margin-left: 15px"
+                                *ngIf="form.controls['name']?.touched && form.controls['name']?.errors?.['required']">
+                                Name is required
+                            </div>
+
+                            <div class="alert alert-danger" style="width: 79%; margin-left: 15px"
+                                *ngIf="form.controls['name']?.touched && form.controls['name']?.value.length < 3">
+                                Name must be at least 3 characters long
+                            </div>
+
+                            <div class="alert alert-danger" style="width: 79%; margin-left: 15px"
+                                *ngIf="form.controls['name']?.touched && form.controls['name']?.value.length > 20">
+                                Name must be at most 20 characters long
+                            </div>
+
+
                         </div>
+
+
                         <div class="form-group">
                             <label class="control-label col-sm-2" for="lname">Type</label>
-                            <select class="form-control select">
+                            <select class="form-control select" id="dishType" name="dishType" required ngModel>
                                 <option class="select-dish" selected disabled>
                                     Please select your recipe type
                                 </option>
@@ -36,19 +57,52 @@
                                 <option>Dessert</option>
                                 <option>Snack</option>
                             </select>
+
+                            <div class="alert alert-danger" style="width: 79%; margin-left: 15px"
+                                *ngIf="form.controls['dishType']?.touched && form.controls['dishType']?.errors?.['required']">
+                                Dish type is required
+                            </div>
+
                         </div>
+
+
                         <div class="form-group">
                             <label class="control-label col-sm-2" for="email">Image URL:</label>
+
                             <div class="col-sm-10">
-                                <input type="email" class="form-control" id="email" placeholder="Enter an image URL"
-                                    name="email">
+                                <input type="text" class="form-control" id="imageUrl" placeholder="Enter an image URL"
+                                    name="imageUrl" pattern="^https?:\/\/(.+)$" required ngModel>
                             </div>
+
+                            <div class="alert alert-danger" style="width: 79%; margin-left: 15px"
+                                *ngIf="form.controls['imageUrl']?.touched && form.controls['imageUrl']?.errors?.['required']">
+                                Image URL is required
+                            </div>
+
+                            <div class="alert alert-danger" style="width: 79%; margin-left: 15px"
+                                *ngIf="form.controls['imageUrl']?.touched && form.controls['imageUrl']?.errors?.['pattern']">
+                                You must enter a valid URL
+                            </div>
+
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-2" for="email">Servings:</label>
+
                             <div class="col-sm-10">
-                                <input type="number" class="form-control" id="servings" placeholder="4" name="servings">
+                                <input type="number" class="form-control" id="servings" placeholder="4" name="servings"
+                                    min="1" max="40" required ngModel>
                             </div>
+
+                            <div class="alert alert-danger" style="width: 79%; margin-left: 15px"
+                                *ngIf="form.controls['servings']?.touched && form.controls['servings']?.errors?.['required']">
+                                Servings Number is required
+                            </div>
+
+                            <div class="alert alert-danger" style="width: 79%; margin-left: 15px"
+                                *ngIf="form.controls['servings']?.touched && form.controls['servings']?.value < 1 || form.controls['servings']?.value > 40">
+                                You must enter a valid number for Servings
+                            </div>
+
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-2" for="comment">Ingredients:</label>
@@ -56,7 +110,20 @@
                                 *Please type enter after each ingredient*
                             </h6>
                             <div class="col-sm-10">
-                                <textarea class="form-control" rows="5" id="ingredients"></textarea>
+
+                                <textarea class="form-control" rows="5" id="ingredients" name="ingredients" required
+                                    ngModel></textarea>
+
+                                <div class="alert alert-danger" style="width: 79%; margin-left: 15px"
+                                    *ngIf="form.controls['ingredients']?.touched && form.controls['ingredients']?.errors?.['required']">
+                                    Ingredients are required
+                                </div>
+
+                                <div class="alert alert-danger" style="width: 79%; margin-left: 15px"
+                                    *ngIf="form.controls['ingredients']?.touched && form.controls['ingredients']?.value.length < 6">
+                                    Ingredients must be at least 6 characters long
+                                </div>
+
                             </div>
                         </div>
                         <div class="form-group">
@@ -65,37 +132,93 @@
                                 *Please type enter after each step of the preparation*
                             </h6>
                             <div class="col-sm-10">
-                                <textarea class="form-control" rows="5" id="preparation"></textarea>
+
+                                <textarea class="form-control" rows="5" id="preparation" name="preparation" required
+                                    ngModel></textarea>
+
+                                <div class="alert alert-danger" style="width: 79%; margin-left: 15px"
+                                    *ngIf="form.controls['preparation']?.touched && form.controls['preparation']?.errors?.['required']">
+                                    Preparation is required
+                                </div>
+
+                                <div class="alert alert-danger" style="width: 79%; margin-left: 15px"
+                                    *ngIf="form.controls['preparation']?.touched && form.controls['preparation']?.value.length < 10">
+                                    Preparation must be at least 10 characters long
+                                </div>
+
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="" for="comment"> &nbsp; Macronutrients - for the whole recipe</label>
                             <div class="col-sm-offset-2 col-sm-10">
-                                Calories: <input type="number" class="macros-input" name="caloriesWhole">
-                                Carbs: <input type="number" class="macros-input" name="carbsWhole">
-                                Fat: <input type="number" class="macros-input" name="fatWhole">
-                                Protein: <input type="number" class="macros-input" name="proteinWhole">
+                                Calories: <input type="number" class="macros-input" name="caloriesRecipe" required
+                                    min="1" max="10000" ngModel>
+                                Carbs: <input type="number" class="macros-input" name="carbsRecipe" required min="1" max="10000" ngModel>
+                                Fat: <input type="number" class="macros-input" name="fatRecipe" required min="1" max="10000" ngModel>
+                                Protein: <input type="number" class="macros-input" name="proteinRecipe" required min="1" max="10000"
+                                    ngModel>
                             </div>
+
+                            <div class="alert alert-danger" style="width: 79%; margin-left: 15px" 
+                                *ngIf="form.controls['caloriesRecipe']?.touched && form.controls['caloriesRecipe']?.errors?.['required']
+                                    || form.controls['carbsRecipe']?.touched && form.controls['carbsRecipe']?.errors?.['required']
+                                    || form.controls['fatRecipe']?.touched && form.controls['fatRecipe']?.errors?.['required']
+                                    || form.controls['proteinRecipe']?.touched && form.controls['proteinRecipe']?.errors?.['required']
+                                ">
+                                All Nutrition facts are required
+                            </div>
+
+                            <div class="alert alert-danger" style="width: 79%; margin-left: 15px" 
+                                *ngIf="form.controls['caloriesRecipe']?.touched && form.controls['caloriesRecipe']?.value < 1 || form.controls['caloriesRecipe']?.value > 10000
+                                    || form.controls['carbsRecipe']?.touched && form.controls['carbsRecipe']?.value < 1 || form.controls['carbsRecipe']?.value > 10000
+                                    || form.controls['fatRecipe']?.touched && form.controls['fatRecipe']?.value < 1 || form.controls['fatRecipe']?.value > 10000
+                                    || form.controls['proteinRecipe']?.touched && form.controls['proteinRecipe']?.value < 1 || form.controls['proteinRecipe']?.value > 10000
+                                ">
+                                All nutrition facts must be between 1 and 10 000
+                            </div>
+
                         </div>
                         <div class="form-group">
-                            <label class="" for="comment"> &nbsp;  Macronutrients - for one serving</label>
+                            <label class="" for="comment"> &nbsp; Macronutrients - for one serving</label>
+
                             <div class="col-sm-offset-2 col-sm-10">
-                                Calories: <input type="number" class="macros-input" name="caloriesServing">
-                                Carbs: <input type="number" class="macros-input" name="carbsServing">
-                                Fat: <input type="number" class="macros-input" name="fatServing">
-                                Protein: <input type="number" class="macros-input" name="proteinServing">
+                                Calories: <input type="number" class="macros-input" name="caloriesServing" required
+                                    min="1" max="10000" ngModel>
+                                Carbs: <input type="number" class="macros-input" name="carbsServing" required min="1" max="10000" ngModel>
+                                Fat: <input type="number" class="macros-input" name="fatServing" required min="1" max="10000" ngModel>
+                                Protein: <input type="number" class="macros-input" name="proteinServing" required min="1" max="10000"
+                                    ngModel>
                             </div>
+
+                            <div class="alert alert-danger" style="width: 79%; margin-left: 15px" 
+                                *ngIf="form.controls['caloriesServing']?.touched && form.controls['caloriesServing']?.errors?.['required']
+                                    || form.controls['carbsServing']?.touched && form.controls['carbsServing']?.errors?.['required']
+                                    || form.controls['fatServing']?.touched && form.controls['fatServing']?.errors?.['required']
+                                    || form.controls['proteinServing']?.touched && form.controls['proteinServing']?.errors?.['required']
+                                ">
+                                All Nutrition facts are required
+                            </div>
+
+                            <div class="alert alert-danger" style="width: 79%; margin-left: 15px" 
+                                *ngIf="form.controls['caloriesServing']?.touched && form.controls['caloriesServing']?.value < 1 || form.controls['caloriesServing']?.value > 10000
+                                    || form.controls['carbsServing']?.touched && form.controls['carbsServing']?.value < 1 || form.controls['carbsServing']?.value > 10000
+                                    || form.controls['fatServing']?.touched && form.controls['fatServing']?.value < 1 || form.controls['fatServing']?.value > 10000
+                                    || form.controls['proteinServing']?.touched && form.controls['proteinServing']?.value < 1 || form.controls['proteinServing']?.value > 10000
+                                ">
+                                All nutrition facts must be between 1 and 10 000
+                            </div>
+
                         </div>
                         <div class="form-group">
-                            <label class="" for="comment"> &nbsp; Additional Information:</label>
+                            <label class="" for="details"> &nbsp; Additional Information:</label>
 
                             <div class="col-sm-10">
-                                <textarea class="form-control" rows="5" id="detaios"></textarea>
+                                <textarea class="form-control" rows="5" id="details" name="details" ngModel></textarea>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-sm-offset-2 col-sm-10">
-                                <button type="submit" class="btn btn-default">Submit</button>
+                                <button type="submit" class="btn btn-default" [disabled]="form.invalid">Submit</button>
                             </div>
                         </div>
                     </div>

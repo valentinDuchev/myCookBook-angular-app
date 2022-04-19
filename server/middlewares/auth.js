@@ -11,9 +11,12 @@ function generateAccessToken (email, firstName, lastName, gender) {
 };
 
 function isUser (req, res, next) {
-    const token = req.cookies.access_token;
+    const token = req.headers['authorization'];
+
+    console.log(token)
 
     if (!token) {
+        console.log('!token')
         throw new Error('Access Denied')
     } 
     
@@ -26,6 +29,7 @@ function isUser (req, res, next) {
         req.gender = data.gender;
         next();
     } catch (err) {
+        console.log(err)
         return res.status(401).json({ message: 'Access Denied' });
     }
 }

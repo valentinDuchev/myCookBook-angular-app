@@ -11,26 +11,61 @@
             <p>Sign in your account of EatFit</p>
             <!-- <label for="login">Already has an account? Sign in here:</label> -->
             <br>
-            <h6>Still don't have an account? Sign up for free here<br> <a href="#">Sign up </a></h6>
+            <h6>Still don't have an account? Sign up for free here<br> <a routerLink="/register">Sign up </a></h6>
             <!-- <a href="#">Sign in</a>
             <input type="submit"> -->
         </div>
         <div class="col-md-9 register-right">
 
+            <pre>{{form.value | json}}</pre>
+
             <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                    <h3 class="register-heading">Login in EatFit</h3>
+                    <h3 class="register-heading">Login in Cook-Fit</h3>
                     <div class="row register-form">
                         <div class="col-md-6">
                         </div>
-                        <div class="form-group">
-                            <input type="email" class="form-control" placeholder="Your Email *" value="" />
-                        </div>
+                        <form #form="ngForm" (submit)="login(form)">
 
-                        <div class="form-group">
-                            <input type="password" class="form-control" placeholder="Password *" value="" />
-                        </div>
-                        <input type="submit" class="btnRegister" value="Logjn" />
+                            <div class="alert alert-danger" *ngIf="error">
+                                Incorrect username or password
+                            </div>
+
+                            <div class="form-group">
+                                <input type="email" class="form-control" placeholder="Your Email *" value="{{data.email}}"
+                                    name="email" id="email" required ngModel
+                                    pattern="(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|'(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*'')@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])"
+                                />
+                            </div>
+
+                            <div class="alert alert-danger" style="width: 50%; margin-left: 158px"
+                                *ngIf="form.controls['email']?.touched && form.controls['email']?.errors?.['required']">
+                                Email is required
+                            </div>  
+
+                            <div class="alert alert-danger" style="width: 50%; margin-left: 158px"
+                                *ngIf="form.controls['email']?.touched && form.controls['email']?.errors?.['pattern']">
+                                You must enter a valid Email
+                            </div>
+
+                            <div class="form-group">
+                                <input type="password" class="form-control" placeholder="Password *" value="{{form.value.password}}"
+                                    name="password" id="password" required minlength="8" ngModel />
+                            </div>
+
+                            <div class="alert alert-danger" style="width: 50%; margin-left: 158px"
+                                *ngIf="form.controls['password']?.touched && form.controls['password']?.errors?.['required']">
+                                Password is required
+                            </div> 
+
+                            <div class="alert alert-danger" style="width: 50%; margin-left: 158px"
+                                *ngIf="form.controls['password']?.value?.length < 8 && form.controls['password']?.touched">
+                                Password must be at least 8 characters long
+                            </div>
+                            <input type="submit" class="btnRegister" value="Login" [disabled]="form.invalid">
+
+                            
+                        </form>
                     </div>
                 </div>
             </div>
@@ -39,5 +74,3 @@
         </div>
     </div>
 </div>
-
-

@@ -1,0 +1,28 @@
+TODO
+
+--> Like and Dislike Functionality for NON-AUTHOR of the current recipe
+
+--> Profile Page Functionality
+
+--> Add User / Author to create
+
+--> Add Edit Functionality for Author of the current recipe
+
+--> Add browse in file system in create for choosing an image in the file of the computer
+
+--> Add About Page
+
+--> Add Home Page
+
+--> Add Search Functionality
+
+--> Add Pagination in the catalog page
+
+--> Add sorting functionality in the catalog page
+
+--> Add better html+css to the footer
+
+--> Fix all guards in the back-end and add guards to the front-end
+
+--> Add choose profile picture for the user profile
+------> Add Default profile picture depending on the choosen gender

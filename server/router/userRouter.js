@@ -6,7 +6,7 @@ const router = require('express').Router();
 router.post('/users/register', isGuest, async (req, res) => {
 
     try {
-        if (req.body.password != req.body.repass) {
+        if (req.body.password != req.body.rePass) {
             throw new Error('Passwords do not match');
         }
 
@@ -38,7 +38,8 @@ router.post('/users/register', isGuest, async (req, res) => {
         .json({ message: "Registered in Successfully", user, token });
 
     } catch (err) {
-        console.log(err);
+        res.json({message: "An error has occured", error: err.message})
+        console.log(err)
     }
     
 });
@@ -56,6 +57,7 @@ router.post('/users/login', isGuest, async (req, res) => {
         .status(200)
         .json({ message: "Logged in Successfully", user, token });
     } catch (err) {
+        res.json({message: err.message})
         console.log(err);
     }
 });
