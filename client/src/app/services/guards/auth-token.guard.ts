@@ -28,7 +28,13 @@ export class AuthGuard implements CanActivate {
         return true;
       }
     } else {
-      return false;
+      alert('You have to sign in your profile.');
+        this.router.navigate(['login'])
+          .then(() => {
+            window.location.reload();
+          });
+        localStorage.removeItem('token');
+        return false;
     }
 
   }

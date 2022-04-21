@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { RecipeService } from '../services/recipeService/recipe.service';
 
 @Component({
@@ -31,10 +32,12 @@ export class CreateComponent implements OnInit {
     _token: ''
   }
 
+  error = null;
 
 
 
-  constructor(private recipeService: RecipeService) { }
+
+  constructor(private recipeService: RecipeService, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -57,17 +60,25 @@ export class CreateComponent implements OnInit {
       this.data.fatServing = formData.form.controls.fatServing.value;
       this.data.proteinServing = formData.form.controls.proteinServing.value;
       this.data.details = formData.form.controls.details.value;
-      if (token != null) {
-        this.data._token = token;
-      }
 
-      console.log(this.data)
       this.htmlForm.reset();
 
       this.recipeService.postRecipe(this.data)
         .subscribe(
           (res) => {
-            console.log(res)
+            if (res.message == 'Recipe created successfully') {
+              console.log(res)
+              this.error = null;
+              console.log('else')
+              this.htmlForm.resetForm();
+              this.router.navigate(['catalog'])
+                .then(() => {
+                  window.location.reload();
+                });
+
+            } else {
+              this.error == 'Unsuccessful creation of the recipe';
+            }
           }
         )
 

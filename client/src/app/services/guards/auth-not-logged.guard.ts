@@ -19,8 +19,6 @@ export class AuthNotLoggedGuard implements CanActivate {
         .then(() => {
           window.location.reload();
         });
-
-        
       return false;
     }
   }

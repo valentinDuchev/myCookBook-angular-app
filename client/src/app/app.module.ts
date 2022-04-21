@@ -20,6 +20,8 @@ import { AboutPageComponent } from './about-page/about-page.component';
 import { AuthInterceptor } from './services/interceptors/auth.interceptor';
 import { AuthGuard } from './services/guards/auth-token.guard';
 import { AuthNotLoggedGuard } from './services/guards/auth-not-logged.guard';
+import { ProfilePageComponent } from './profile-page/profile-page.component';
+import { ProfileUserComponent } from './profile-user/profile-user.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,9 @@ import { AuthNotLoggedGuard } from './services/guards/auth-not-logged.guard';
     RecipeCardComponent,
     RegisterComponent,
     HomePageComponent,
-    AboutPageComponent
+    AboutPageComponent,
+    ProfilePageComponent,
+    ProfileUserComponent
   ],
   imports: [
     BrowserModule,
@@ -41,10 +45,12 @@ import { AuthNotLoggedGuard } from './services/guards/auth-not-logged.guard';
       { path: 'register', component: RegisterComponent, canActivate: [AuthNotLoggedGuard] },
       { path: 'login', component: LoginComponent, canActivate: [AuthNotLoggedGuard] },
       { path: 'create', component: CreateComponent, canActivate: [AuthGuard]  },
-      { path: 'details/:id', component: DetailsPageComponent, canActivate: [AuthGuard] },
+      { path: 'details/:id', component: DetailsPageComponent}, //, canActivate: [AuthGuard] 
       { path: 'catalog', component: RecipeCardComponent },
       { path: '', component: HomePageComponent },
-      { path: 'about', component: AboutPageComponent}
+      { path: 'about', component: AboutPageComponent}, 
+      { path: 'myProfile', component: ProfilePageComponent }, 
+      { path: 'profile/:email', component: ProfileUserComponent }
     ]),
     HttpClientModule,
     FormsModule

@@ -1,5 +1,5 @@
-const { register, login } = require('../controllers/userController');
-const { generateAccessToken, isGuest, isUser } = require('../middlewares/auth');
+const { register, login, getUserByEmail, getUserById } = require('../controllers/userController');
+const { generateAccessToken, isGuest, isUser, parseJwt } = require('../middlewares/auth');
 
 const router = require('express').Router();
 
@@ -15,33 +15,33 @@ router.post('/users/register', isGuest, async (req, res) => {
         }
 
         const reqData = {
-            firstName: req.body.firstName, 
-            lastName: req.body.lastName, 
-            password: req.body.password, 
-            gender: req.body.gender, 
-            email: req.body.email, 
-            seqQuestion: req.body.seqQuestion, 
-            seqAnswer: req.body.seqAnswer, 
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            password: req.body.password,
+            gender: req.body.gender,
+            email: req.body.email,
+            seqQuestion: req.body.seqQuestion,
+            seqAnswer: req.body.seqAnswer,
         }
 
         const user = await register(reqData);
 
         const token = generateAccessToken(req.body.email, user.firstName, user.lastName, user.gender);
 
-        
+
         return res.cookie("access_token", token, {
-            httpOnly: true, 
+            httpOnly: true,
             // secure: process.env.NODE_ENV === "production"
         })
-        
-        .status(200)
-        .json({ message: "Registered in Successfully", user, token });
+
+            .status(200)
+            .json({ message: "Registered in Successfully", user, token });
 
     } catch (err) {
-        res.json({message: "An error has occured", error: err.message})
+        res.json({ message: "An error has occured", error: err.message })
         console.log(err)
     }
-    
+
 });
 
 router.post('/users/login', isGuest, async (req, res) => {
@@ -50,26 +50,79 @@ router.post('/users/login', isGuest, async (req, res) => {
         const token = generateAccessToken(req.body.email, user.firstName, user.lastName, user.gender);
 
         return res.cookie("access_token", token, {
-            httpOnly: true, 
+            httpOnly: true,
             // secure: process.env.NODE_ENV === "production"
         })
-        
-        .status(200)
-        .json({ message: "Logged in Successfully", user, token });
+
+            .status(200)
+            .json({ message: "Logged in Successfully", user, token });
     } catch (err) {
-        res.json({message: err.message})
+        res.json({ message: err.message })
         console.log(err);
     }
 });
 
-router.get('/users/logout', isUser, (req, res) => {
+router.get('/users/logout', isUser, (req, res) => { //TODO FIX BACKEND OGOUT
     try {
         return res.clearCookie("access_token")
-        .status(200)
-        .json({ message: 'Successfully logged out.' });
+            .status(200)
+            .json({ message: 'Successfully logged out.' });
     } catch (err) {
         console.log(err)
     }
+})
+
+router.get('/users/myProfile', isUser, async (req, res) => {
+    try {
+        const token = req.headers['authorization'];
+
+        if (!token) {
+            throw new Error('There is no auth token in request headers')
+        }
+
+        const tokenData = parseJwt(token);
+        const user = await getUserByEmail(tokenData.email)
+        const userData = {
+            firstName: user.firstName,
+            lastName: user.lastName,
+            gender: user.gender,
+            email: user.email,
+            posted: user.posted,
+            liked: user.liked
+        }
+
+        console.log('tokenData: ' + tokenData)
+        console.log('user: ' + user);
+
+        res.json({ message: "Successfully accessed profile page", userData })
+
+
+    } catch (err) {
+        console.log(err)
+    }
+})
+
+router.get('/users/userProfile/:email', async(req, res) => {
+    try {
+        const email = req.params.email;
+        console.log(email)
+        const user = await getUserByEmail(email);
+        console.log(user)
+
+        const userData = {
+            firstName: user.firstName, 
+            lastName: user.lastName, 
+            gender: user.gender, 
+            email: user.email, 
+            posted: user.posted, 
+            liked: user.liked
+        }
+
+        res.json({ message: `Successfully accessed the profile page of the user ${userData.email}`, userData})
+    } catch (err) {
+        console.log(err)
+    }
+    
 })
 
 module.exports = router;

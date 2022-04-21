@@ -10,9 +10,11 @@ TODO
 
 --> Add browse in file system in create for choosing an image in the file of the computer
 
---> Add About Page
+<DONE> --> Add About Page
 
---> Add Home Page
+<DONE> --> Add Home Page
+
+--> Add html, css and etc to home and about page
 
 --> Add Search Functionality
 
@@ -22,7 +24,13 @@ TODO
 
 --> Add better html+css to the footer
 
---> Fix all guards in the back-end and add guards to the front-end
+--> Fix all guards in the back-end
+
+<DONE> --> Add guards to the front-end   
 
 --> Add choose profile picture for the user profile
 ------> Add Default profile picture depending on the choosen gender
+
+--> Fix back-end logout
+
+--> Fix ingredients when create -> they must be in array

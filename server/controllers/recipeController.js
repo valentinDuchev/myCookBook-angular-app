@@ -29,7 +29,9 @@ async function updateById (id, data) {
 async function deleteById (id) {
     await Recipe.findByIdAndDelete(id);
 
-}
+};
+
+
 
 module.exports = {
     getAllRecipes, 

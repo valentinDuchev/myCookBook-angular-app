@@ -44,8 +44,18 @@ async function login (email, password) {
     return user;
 }
 
+async function getUserByEmail (email) {
+    return await User.findOne({ email })  
+}
+
+async function getUserById (id) {
+    return await User.findById(id);
+}
+
 module.exports = {
     register,
-    login
+    login, 
+    getUserByEmail, 
+    getUserById
 
 }

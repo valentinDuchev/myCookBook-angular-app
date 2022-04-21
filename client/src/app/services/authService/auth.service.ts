@@ -22,4 +22,12 @@ export class AuthService {
     const expiry = (JSON.parse(atob(token.split('.')[1]))).exp;
     return (Math.floor((new Date).getTime() / 1000)) >= expiry;
   } 
+
+  getProfileInfo() {
+    return this.http.get<any>('http://localhost:3000/api/users/myProfile');
+  }
+
+  getUserProfileInfo (email: any) {
+    return this.http.get<any>(`http://localhost:3000/api/users/userProfile/${email}`);
+  }
 }

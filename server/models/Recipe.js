@@ -1,4 +1,4 @@
-const { Schema, model } = require('mongoose');
+const { Schema, model, Types: { ObjectId } } = require('mongoose');
 
 const URL_PATTERN = /^https?:\/\/(.+)$/;
 
@@ -35,7 +35,7 @@ const recipeSchema = new Schema({
     peopleLiked: { type: [Number] },  //TODO change type to UserId
     peopleDisliked: { type: [Number] }, //TODO Change type to UserId
     dateCreated: { type: Number }, //TODO change type to Date and add Date.now functionality
-    author: { type: String },  //TODO change type to UserId
+    author: { type: ObjectId, ref: 'User', required: true },  //TODO change type to UserId
 
 });
 

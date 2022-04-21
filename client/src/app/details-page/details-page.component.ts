@@ -29,7 +29,8 @@ export class DetailsPageComponent implements OnInit {
     preparation: '',
     proteinRecipe: '',
     proteinServing: '',
-    servings: ''
+    servings: '', 
+    author: ''
   }
 
   constructor
@@ -61,10 +62,11 @@ export class DetailsPageComponent implements OnInit {
             this.data.preparation = res.result.preparation,
             this.data.proteinRecipe = res.result.proteinRecipe,
             this.data.proteinServing = res.result.proteinServing,
-            this.data.servings = res.result.servings
+            this.data.servings = res.result.servings, 
+            this.data.author = res.result.author
         })
 
-        console.log(this.data)
+    console.log(this.data)
   }
 
   /*

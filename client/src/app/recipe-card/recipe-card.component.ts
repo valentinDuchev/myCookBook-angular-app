@@ -19,8 +19,8 @@ export class RecipeCardComponent implements OnInit {
   ngOnInit(): void {
     this.recipeService.getAllRecipes().subscribe( data => {
       this.allRecipes = data;
+      
       this.singleRecipe = this.allRecipes.result;
-      console.log(this.allRecipes.result[0])
     })
   }
 
