@@ -30,11 +30,11 @@ const recipeSchema = new Schema({
     carbsServing: { type: Number, default: 0 },
     fatServing: { type: Number, default: 0 },
     proteinServing: { type: Number, default: 0 },
-    likes: { type: [Number], default: 0 },
-    dislikes: { type: [Number], default: 0 },
-    peopleLiked: { type: [Number] },  //TODO change type to UserId
-    peopleDisliked: { type: [Number] }, //TODO Change type to UserId
-    dateCreated: { type: Number }, //TODO change type to Date and add Date.now functionality
+    likes: { type: Number, default: 0 },
+    dislikes: { type: Number, default: 0 },
+    peopleLiked: { type: [ObjectId], ref: 'User' },  //TODO change type to UserId
+    peopleDisliked: { type: [ObjectId], ref: 'User' }, //TODO Change type to UserId
+    dateCreated: { type: Date, default: Date.now() }, //TODO change type to Date and add Date.now functionality
     author: { type: ObjectId, ref: 'User', required: true },  //TODO change type to UserId
 
 });

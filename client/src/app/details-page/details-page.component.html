@@ -13,14 +13,15 @@
   
   
         <span class="first">
-          <a href="#"></a>
+          <a (click)="like(data._id)"></a>
           <!-- <a>cska</a> -->
-          <p> 6 <i class="fa fa-thumbs-o-up like-count" aria-hidden="true"></i> </p>
+          <p> {{data.likes}} <i class="fa fa-thumbs-o-up like-count" aria-hidden="true"></i> </p>
         </span>
         <span class="second">
-          <p> <i class="fa fa-thumbs-o-down disilke-count-dislike " aria-hidden="true"></i>3</p>
+          <p> <i class="fa fa-thumbs-o-down disilke-count-dislike " aria-hidden="true"></i>
+          {{data.dislikes}}</p>
   
-          <a href="#"></a>
+          <a (click)="dislike(data._id)"></a>
         </span>
   
         <div class="product-btn">

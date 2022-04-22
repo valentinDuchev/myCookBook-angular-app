@@ -93,3 +93,20 @@ body{
     font-weight: 600;
     color: #0062cc;
 }
+
+.tab-pane {
+    margin-top: -140px;
+    width: 95%
+}
+
+.row {
+    margin-top: 10px
+}
+
+/* .col-md-4 {
+
+
+    margin-left: 10px;
+    margin-right: 10px; 
+
+} */

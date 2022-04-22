@@ -23,4 +23,14 @@ export class RecipeService {
   getSingleRecipe (id: any): Observable<any> {
     return this.http.get<Recipe>('http://localhost:3000/api/recipes/' + id);
   } 
+
+  like (id: any): Observable<any> {
+    return this.http.get<any>(`http://localhost:3000/api/recipes/${id}/like`);
+  }
+
+  dislike(id: any): Observable<any> {
+    return this.http.get<any>(`http://localhost:3000/api/recipes/${id}/dislike`);
+  }
+
+  
 }

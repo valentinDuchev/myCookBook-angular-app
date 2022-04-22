@@ -1,10 +1,10 @@
 TODO
 
---> Like and Dislike Functionality for NON-AUTHOR of the current recipe
+<DONE> --> Like and Dislike Functionality for NON-AUTHOR of the current recipe
 
---> Profile Page Functionality
+<DONE> --> Profile Page Functionality
 
---> Add User / Author to create
+<DONE> --> Add User / Author to create
 
 --> Add Edit Functionality for Author of the current recipe
 
@@ -20,7 +20,7 @@ TODO
 
 --> Add Pagination in the catalog page
 
---> Add sorting functionality in the catalog page
+<DONE> --> Add sorting functionality in the catalog page
 
 --> Add better html+css to the footer
 
@@ -34,3 +34,5 @@ TODO
 --> Fix back-end logout
 
 --> Fix ingredients when create -> they must be in array
+
+--> Add ranking and index for users 

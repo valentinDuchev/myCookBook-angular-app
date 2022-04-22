@@ -29,8 +29,9 @@ export class DetailsPageComponent implements OnInit {
     preparation: '',
     proteinRecipe: '',
     proteinServing: '',
-    servings: '', 
-    author: ''
+    servings: '',
+    author: '',
+    _id: ''
   }
 
   constructor
@@ -45,6 +46,7 @@ export class DetailsPageComponent implements OnInit {
     this.recipeService.getSingleRecipe(this.id)
       .subscribe(
         (res) => {
+          this.data._id = res.result._id
           this.data.caloriesRecipe = res.result.caloriesRecipe,
             this.data.caloriesServing = res.result.caloriesServing,
             this.data.carbsRecipe = res.result.carbsRecipe,
@@ -62,36 +64,39 @@ export class DetailsPageComponent implements OnInit {
             this.data.preparation = res.result.preparation,
             this.data.proteinRecipe = res.result.proteinRecipe,
             this.data.proteinServing = res.result.proteinServing,
-            this.data.servings = res.result.servings, 
+            this.data.servings = res.result.servings,
             this.data.author = res.result.author
         })
 
-    console.log(this.data)
   }
 
-  /*
-  caloriesRecipe: 899
-caloriesServing: 899
-carbsRecipe: 88
-carbsServing: 88
-dishType: "Main Dish"
-dislikes: [0]
-fatRecipe: 45
-fatServing: 45
-imageUrl: "https://www.aladinfoods.bg/files/images/294/light_duner.png"
-ingredients: []
-likes: [0]
-name: "Doner"
-peopleDisliked: []
-peopleLiked: []
-preparation: ['Make the Meat ready, then put it on the bread with the potatoes and sauce']
-proteinRecipe: 39
-proteinServing: 39
-servings: 1
-__v: 0
-_id: "62529a99f0f3665ecd6e6acc"
+  like(id: any) {
+    this.recipeService.like(id).subscribe(
+      (res) => {
+        if (res.message == 'You have already liked this recipe') {
+          alert(res.message)
+        } else if (res.message == 'Author cannot like their own recipes') {
+          alert(res.message)
+        } else {
+          res.then(window.location.reload())
+        }
+      }
+    )
+  }
 
-  */
+  dislike(id: any) {
+    this.recipeService.dislike(id).subscribe(
+      (res) => {
+        if (res.message == 'You have already disliked this recipe') {
+          alert(res.message)
+        } else if (res.message == 'Author cannot dislike their own recipes') {
+          alert(res.message)
+        } else {
+          res.then(window.location.reload())
+        }
+      }
+    )
+  }
 
 
 

@@ -28,6 +28,8 @@ export class ProfileUserComponent implements OnInit {
       posted: [], 
     }
 
+    date: any = '';
+
   ngOnInit(): void {
     this.email = this.activatedRoute.snapshot.params['email'];
 
@@ -41,6 +43,12 @@ export class ProfileUserComponent implements OnInit {
         this.data.gender = res.userData.gender
         this.data.liked = res.userData.liked
         this.data.posted = res.userData.posted
+
+        for (let recipe of this.data.posted) {
+          const options = { year: 'numeric', month: 'long', day: 'numeric' };
+          this.date = new Date(recipe.dateCreated);
+          this.date = this.date.toLocaleDateString("en-US", options);
+        }
 
         
       }

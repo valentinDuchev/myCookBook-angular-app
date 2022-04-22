@@ -21,7 +21,6 @@ function isUser (req, res, next) {
     
     try {
         const data = jwt.verify(token, secret);
-        console.log(data)
         req.email =  data.email;
         req.firstName = data.firstName;
         req.lastName = data.lastName;

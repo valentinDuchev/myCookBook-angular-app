@@ -15,7 +15,6 @@ async function createRecipe (recipe) {
 
 async function getById (_id) {
     const result = await Recipe.findOne({_id});
-    console.log(result)
     return result;
 }
 

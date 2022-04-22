@@ -88,11 +88,11 @@ router.get('/users/myProfile', isUser, async (req, res) => {
             gender: user.gender,
             email: user.email,
             posted: user.posted,
-            liked: user.liked
+            liked: user.liked, 
+            disliked: user.disliked, 
+            totalRecipeLikes: user.totalRecipeLikes, 
+            totalRecipeDislikes: user.totalRecipeDislikes
         }
-
-        console.log('tokenData: ' + tokenData)
-        console.log('user: ' + user);
 
         res.json({ message: "Successfully accessed profile page", userData })
 
@@ -105,9 +105,7 @@ router.get('/users/myProfile', isUser, async (req, res) => {
 router.get('/users/userProfile/:email', async(req, res) => {
     try {
         const email = req.params.email;
-        console.log(email)
         const user = await getUserByEmail(email);
-        console.log(user)
 
         const userData = {
             firstName: user.firstName, 

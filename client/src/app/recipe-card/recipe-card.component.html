@@ -1,8 +1,36 @@
+<div class="column">
+    <div class="btn-group">
+        <h4>Filter by Type:</h4>
+        <button (click)="filter('appetizer')">Appetizer</button>
+        <button (click)="filter('mainDish')">Main Dish</button>
+        <button (click)="filter('dessert')">Dessert</button>
+        <button (click)="filter('snack')">Snack</button>
+        <button (click)="filter('default')">All</button>
+        <!-- <button class="showAll">Default</button> -->
+    </div>
+</div>
+
+<div class="column">
+    <div class="btn-group">
+        <h4>Sort by:</h4>
+        <button (click)="filter('likes')">Likes</button>
+        <button (click)="filter('dislikes')">Dislikes</button>
+        <button (click)="filter('oldest')">Oldest</button>
+        <button (click)="filter('newest')">Newest</button>
+       
+    </div>
+</div>
+
+<!-- <span *ngIf="singleRecipe.length == 0">
+    There are no available recipes of this type.
+</span> -->
 <div id="container" *ngFor="let recipe of singleRecipe">
 
 
     <div class="product-details">
-        <h1>{{recipe.name}}</h1><br>
+        <h1 style="font-size: 45px">{{recipe.name}}</h1><br>
+
+        <h4>{{recipe.dateCreated.substring(0, 10)}}</h4>
 
 
 
@@ -25,11 +53,11 @@
                 <div class="column">
                     <div class="row2">
                         <div class="column">
-                            <p><button class="like-btn">Like</button></p>
+                            <p><button class="like-btn" (click)="like(recipe._id)">Like</button></p>
                             <p> {{recipe.likes}} <i class="fa fa-thumbs-o-up like-count" aria-hidden="true"></i> </p>
                         </div>
                         <div class="column">
-                            <p><button class="dislike-btn">Dislike</button></p>
+                            <p><button class="dislike-btn" (click)="dislike(recipe._id)">Dislike</button></p>
                             <p> {{recipe.dislikes}} <i class="fa fa-thumbs-o-down " aria-hidden="true"></i></p>
                         </div>
                     </div>

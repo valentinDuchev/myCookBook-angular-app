@@ -235,7 +235,7 @@ body {
         color: #fff;
         letter-spacing: 1px;
         /* color: rgba(0,150,136 ,1); */
-        margin-top: 135%;
+        margin-top: 100%;
         margin-left: 0%;
         
     
@@ -260,7 +260,7 @@ body {
         color: #fff;
         letter-spacing: 1px;
         /* color: rgba(255,82,82 ,1); */
-        margin-top: 135%;
+        margin-top: 100%;
         margin-left: 0%;
     } 
     
@@ -324,4 +324,57 @@ body {
     
       .row3-like-dislike-button {
           margin-top: 60%;
+      }
+
+      .btn-group {
+          margin-left: 10px;
+      }
+
+      .btn-group>h4 {
+          /* margin-left: -420px; */
+          margin-right: 10px;
+          margin-top: 5px;
+
+      }
+
+      .btn-group button {
+        background-color: #04AA6D; /* Green background */
+        border: 1px solid green; /* Green border */
+        color: white; /* White text */
+        padding: 10px 24px; /* Some padding */
+        cursor: pointer; /* Pointer/hand icon */
+        float: left; /* Float the buttons side by side */
+      }
+      
+      /* Clear floats (clearfix hack) */
+      .btn-group:after {
+        content: "";
+        clear: both;
+        display: table;
+      }
+      
+      .btn-group button:not(:last-child) {
+        border-right: none; /* Prevent double borders */
+      }
+      
+      /* Add a background color on hover */
+      .btn-group button:hover {
+        background-color: #3e8e41;
+      }
+
+      .column {
+        float: left;
+        width: 50%;
+        padding: 10px;
+        
+
+        
+      }
+
+      .showAll {
+          margin-left: 100px
+      }
+
+      .default{
+          
       }

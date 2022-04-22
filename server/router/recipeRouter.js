@@ -10,7 +10,7 @@ router.get('/recipes', async (req, res) => { //TODO ADD iSUser middleware
     const result = await getAllRecipes();
 
     // console.log(result)
-    res.status(200).json({ result });
+    res.status(200).json({ result, message: 'Success' });
 });
 
 router.post('/recipes', isUser, async (req, res) => { //TODO Add isUser middleware
@@ -21,10 +21,10 @@ router.post('/recipes', isUser, async (req, res) => { //TODO Add isUser middlewa
             throw new Error('You have to log in to create recipe.')
         }
 
+        
+
         const userData = parseJwt(token);
-        console.log(userData.email);
         const user = await getUserByEmail(userData.email);
-        console.log(user)
 
 
         const data = {
@@ -42,6 +42,7 @@ router.post('/recipes', isUser, async (req, res) => { //TODO Add isUser middlewa
             carbsServing: req.body.carbsServing,
             fatServing: req.body.fatServing,
             proteinServing: req.body.proteinServing,
+            dateCreated: Date.now(),
             author: user._id
         };
 
@@ -49,6 +50,9 @@ router.post('/recipes', isUser, async (req, res) => { //TODO Add isUser middlewa
 
 
         const result = await createRecipe(data);
+        user.posted.push(result)
+        await user.save();
+
         res.status(201).json({ result, message: 'Recipe created successfully' });
     } catch (err) {
         res.json({ message: err.message })
@@ -63,7 +67,6 @@ router.get('/recipes/:id', async (req, res) => {
 
         if (token) {
             const userData = (parseJwt(token));
-            console.log('UserData.email: ' + userData.email);
         }
 
         const id = req.params.id;
@@ -71,7 +74,10 @@ router.get('/recipes/:id', async (req, res) => {
         const userId = data.author;
         const user = await getUserById(userId);
 
+        console.log(user)
+
         const result = {
+            _id: data._id,
             name: data.name,
             dishType: data.dishType,
             imageUrl: data.imageUrl,
@@ -86,8 +92,10 @@ router.get('/recipes/:id', async (req, res) => {
             carbsServing: data.carbsServing,
             fatServing: data.fatServing,
             proteinServing: data.proteinServing,
-            author: user.email
-        }        
+            author: user.email,
+            likes: data.likes,
+            dislikes: data.dislikes
+        }
 
         res.status(200).json({ message: "Successfully opened details", result });
 
@@ -122,5 +130,85 @@ router.delete('/recipes/:id', isUser, async (req, res) => {
     await deleteById(id);
     res.status(200).json({ message: "Deleted Successfully" })
 })
+
+router.get(`/recipes/:id/like`, isUser, async (req, res) => {
+    try {
+
+        const id = req.params.id;
+        const userToken = req.headers['authorization'];
+        const userData = parseJwt(userToken);
+        const email = userData.email;
+        const user = await getUserByEmail(email);
+        const recipe = await getById(id);
+        const authorId = recipe.author;
+        const author = await getUserById(authorId);
+
+        if (recipe.peopleLiked.includes(user._id)) {
+            throw new Error('You have already liked this recipe')
+        }
+
+        if (recipe.author._id.toString() == user._id.toString()) {
+            throw new Error('Author cannot like their own recipes')
+        }
+
+        recipe.likes += 1;
+        recipe.peopleLiked.push(user)
+        user.liked.push(recipe);
+        author.totalRecipeLikes += 1;
+
+        await recipe.save()
+        await user.save();
+        await author.save()
+
+        res.json({ message: `Liked successfully` })
+    } catch (err) {
+        console.log(err)
+        res.json({ message: err.message })
+    }
+
+})
+
+router.get('/recipes/:id/dislike', isUser, async (req, res) => {
+    try {
+
+        const id = req.params.id;
+        const userToken = req.headers['authorization'];
+        const userData = parseJwt(userToken);
+        const email = userData.email;
+        const user = await getUserByEmail(email);
+        const recipe = await getById(id);
+        const authorId = recipe.author;
+        const author = await getUserById(authorId);
+
+        console.log(author)
+
+        if (recipe.peopleDisliked.includes(user._id)) {
+            throw new Error('You have already disliked this recipe')
+        }
+
+        if (recipe.author._id.toString() == user._id.toString()) {
+            throw new Error('Author cannot dislike their own recipes')
+        }
+
+        recipe.dislikes += 1;
+        recipe.peopleDisliked.push(user);
+        user.disliked += 1;
+        author.totalRecipeDislikes += 1;
+
+        await recipe.save();
+        await author.save();
+        await user.save();
+
+        res.json({ message: 'Disliked successfully' })
+
+    } catch (err) {
+        console.log(err)
+        res.json({ message: err.message })
+    }
+
+})
+
+
+
 
 module.exports = router;

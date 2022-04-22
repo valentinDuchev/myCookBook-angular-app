@@ -49,8 +49,9 @@ import { ProfileUserComponent } from './profile-user/profile-user.component';
       { path: 'catalog', component: RecipeCardComponent },
       { path: '', component: HomePageComponent },
       { path: 'about', component: AboutPageComponent}, 
-      { path: 'myProfile', component: ProfilePageComponent }, 
-      { path: 'profile/:email', component: ProfileUserComponent }
+      { path: 'myProfile', component: ProfilePageComponent, canActivate: [AuthGuard] }, 
+      { path: 'profile/:email', component: ProfileUserComponent }, 
+      // { path: 'recipes/:id/like', component: , canActivate: [AuthGuard] }
     ]),
     HttpClientModule,
     FormsModule

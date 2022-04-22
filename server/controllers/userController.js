@@ -6,8 +6,6 @@ async function register(reqData) {
     const existing = await User.findOne({email: reqData.email});
 
     if (existing) {
-        console.log('reqData', reqData)
-        console.log(existing)
         throw new Error ('Email is taken.')
     }
 
