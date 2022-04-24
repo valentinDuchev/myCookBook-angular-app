@@ -7,7 +7,7 @@
 
 <div>
     <form #form="ngForm" (submit)="create(form)">
-        <pre>{{form.value | json}}</pre>
+        <!-- <pre>{{form.value | json}}</pre> -->
         <div class="container contact">
             <div class="row">
                 <div class="col-md-3">
@@ -72,16 +72,15 @@
 
                         <div class="form-group">
                             <label class="control-label col-sm-2" for="email">Image URL:</label>
+                            <h6 class="type-enter-after-each">
+                                *If you don't enter URL, you will get default image. Otherwise, the URL must be valid - start with 'http://'
+                            </h6>
 
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" id="imageUrl" placeholder="Enter an image URL"
-                                    name="imageUrl" pattern="^https?:\/\/(.+)$" required ngModel>
+                                    name="imageUrl" pattern="^https?:\/\/(.+)$" ngModel>
                             </div>
 
-                            <div class="alert alert-danger" style="width: 79%; margin-left: 15px"
-                                *ngIf="form.controls['imageUrl']?.touched && form.controls['imageUrl']?.errors?.['required']">
-                                Image URL is required
-                            </div>
 
                             <div class="alert alert-danger" style="width: 79%; margin-left: 15px"
                                 *ngIf="form.controls['imageUrl']?.touched && form.controls['imageUrl']?.errors?.['pattern']">
@@ -132,9 +131,7 @@
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-2" for="comment">Preparation:</label>
-                            <h6 class="type-enter-after-each">
-                                *Please type enter after each step of the preparation*
-                            </h6>
+                            
                             <div class="col-sm-10">
 
                                 <textarea class="form-control" rows="5" id="preparation" name="preparation" required

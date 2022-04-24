@@ -1,8 +1,19 @@
 <section id="deatils-page">
     <div class="wrapper">
       <div class="product-img">
-        <img
-          src="{{data.imageUrl}}">
+
+
+        <img src="{{data.imageUrl}}" alt="" *ngIf="data.imageUrl != ''">
+
+        <img src="../../assets/staticImages/appetizer.jpg" *ngIf="data.imageUrl == '' && data.dishType == 'Appetizer'">
+
+        <img src="../../assets/staticImages/main.jpg" *ngIf="data.imageUrl == '' && data.dishType == 'Main Dish'">
+
+        <img src="../../assets/staticImages/dessert.jpg" *ngIf="data.imageUrl == '' && data.dishType == 'Dessert'">
+
+        <img src="../../assets/staticImages/snack.jpg" *ngIf="data.imageUrl == '' && data.dishType == 'Snack'">
+
+
         <div class="product-text-details">
           <h1><strong>{{data.name}}</strong></h1>
           <h2>Author: <a routerLink="/profile/{{data.author}}">{{data.author}}</a></h2>

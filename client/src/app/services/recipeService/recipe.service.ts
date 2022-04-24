@@ -32,5 +32,7 @@ export class RecipeService {
     return this.http.get<any>(`http://localhost:3000/api/recipes/${id}/dislike`);
   }
 
-  
+  search(param: any): Observable<any> {
+    return this.http.get<any>(`http://localhost:3000/api/search/${param}`);
+  }
 }

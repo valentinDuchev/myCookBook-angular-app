@@ -22,6 +22,8 @@ import { AuthGuard } from './services/guards/auth-token.guard';
 import { AuthNotLoggedGuard } from './services/guards/auth-not-logged.guard';
 import { ProfilePageComponent } from './profile-page/profile-page.component';
 import { ProfileUserComponent } from './profile-user/profile-user.component';
+import { SearchService } from './services/searchService/search.service';
+import { SearchedComponent } from './searched/searched.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,8 @@ import { ProfileUserComponent } from './profile-user/profile-user.component';
     HomePageComponent,
     AboutPageComponent,
     ProfilePageComponent,
-    ProfileUserComponent
+    ProfileUserComponent,
+    SearchedComponent,
   ],
   imports: [
     BrowserModule,
@@ -51,6 +54,7 @@ import { ProfileUserComponent } from './profile-user/profile-user.component';
       { path: 'about', component: AboutPageComponent}, 
       { path: 'myProfile', component: ProfilePageComponent, canActivate: [AuthGuard] }, 
       { path: 'profile/:email', component: ProfileUserComponent }, 
+      { path: 'searched', component: SearchedComponent}
       // { path: 'recipes/:id/like', component: , canActivate: [AuthGuard] }
     ]),
     HttpClientModule,
@@ -65,7 +69,8 @@ import { ProfileUserComponent } from './profile-user/profile-user.component';
       multi: true
     },
     AuthGuard, 
-    AuthNotLoggedGuard
+    AuthNotLoggedGuard, 
+    SearchService
 
   ],
   bootstrap: [AppComponent]

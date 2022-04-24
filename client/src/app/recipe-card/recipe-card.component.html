@@ -68,9 +68,16 @@
 
     <div class="product-image">
 
-        <img src="{{recipe.imageUrl}}" alt="">
+        <img src="{{recipe.imageUrl}}" alt="" *ngIf="recipe.imageUrl != ''">
 
+        <img src="../../assets/staticImages/appetizer.jpg" *ngIf="recipe.imageUrl == '' && recipe.dishType == 'Appetizer'">
 
+        <img src="../../assets/staticImages/main.jpg" *ngIf="recipe.imageUrl == '' && recipe.dishType == 'Main Dish'">
+
+        <img src="../../assets/staticImages/dessert.jpg" *ngIf="recipe.imageUrl == '' && recipe.dishType == 'Dessert'">
+
+        <img src="../../assets/staticImages/snack.jpg" *ngIf="recipe.imageUrl == '' && recipe.dishType == 'Snack'">
+        
         <div class="info">
             <h2> Ingredients</h2>
             <ul>

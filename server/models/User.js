@@ -23,7 +23,10 @@ const userSchema = new Schema({
     liked: { type: [recipeSchema] }, 
     disliked: { type: Number, default: 0}, 
     totalRecipeLikes: { type: Number, default: 0}, 
-    totalRecipeDislikes: { type: Number, default: 0 }
+    totalRecipeDislikes: { type: Number, default: 0 }, 
+    rating: { type: Number, default: 0 }, 
+    rank: { type: Number, default: 1 },
+    level: { type: String, default: 'Bronze' }
 
 });
 

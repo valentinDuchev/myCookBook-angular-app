@@ -99,6 +99,10 @@ body{
     width: 95%
 }
 
+.tab-pane >h4 {
+    margin-top: 75px
+}
+
 .row {
     margin-top: 10px
 }

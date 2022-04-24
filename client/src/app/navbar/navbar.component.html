@@ -30,9 +30,9 @@
         <div class="left">
             <ul class="navbar-nav mr-auto left">
                 <li>
-                    <form class="form-inline mt-2 mt-md-0">
-                        <input class="form-control mr-sm-2" type="text" placeholder="Search by author or recipe" aria-label="Search">
-                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                    <form class="form-inline mt-2 mt-md-0" #form="ngForm" (submit)="search(form)">
+                        <input class="form-control mr-sm-2" type="text" placeholder="Search by author or recipe" aria-label="Search" name="search" required ngModel>
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit"  [disabled]="form.invalid">Search</button>
                     </form>
                 </li>
 
@@ -52,3 +52,73 @@
         </div>
     </div>
 </div>
+
+<!-- <div *ngIf="data">
+    <div id="container" *ngFor="let recipe of data">
+
+
+        <div class="product-details">
+            <h1 style="font-size: 45px">{{recipe.name}}</h1><br>
+    
+            <h4>{{recipe.dateCreated.substring(0, 10)}}</h4>
+    
+    
+    
+            <div class="info-calories calories-info">
+                <div class="row">
+                    <div class="column">
+                        <h1> <strong>Nutrition facts:</strong></h1>
+                        <h6>For 1 serving</h6>
+                        <ul>
+                            <li><strong>Calories : </strong>{{recipe.caloriesServing}} </li>
+                            <li><strong>Carbohydrates : </strong>{{recipe.carbsServing}}</li>
+                            <li><strong>Fats: </strong>{{recipe.fatServing}}</li>
+                            <li><strong>Protein: </strong>{{recipe.proteinServing}}</li>
+                        </ul>
+                         <a routerLink="/details/{{recipe._id}}" (click)="getSingleRecipe(recipe._id)" class="learnmore">
+                            Details
+                        </a> 
+                    </div>
+    
+                    <div class="column">
+                        <div class="row2">
+                            <div class="column">
+                                 <p><button class="like-btn" (click)="like(recipe._id)">Like</button></p> 
+                                <p> {{recipe.likes}} <i class="fa fa-thumbs-o-up like-count" aria-hidden="true"></i> </p>
+                            </div>
+                            <div class="column">
+                                 <p><button class="dislike-btn" (click)="dislike(recipe._id)">Dislike</button></p> 
+                                <p> {{recipe.dislikes}} <i class="fa fa-thumbs-o-down " aria-hidden="true"></i></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <div class="product-image">
+    
+            <img src="{{recipe.imageUrl}}" alt="" *ngIf="recipe.imageUrl != ''">
+    
+            <img src="../../assets/staticImages/appetizer.jpg" *ngIf="recipe.imageUrl == '' && recipe.dishType == 'Appetizer'">
+    
+            <img src="../../assets/staticImages/main.jpg" *ngIf="recipe.imageUrl == '' && recipe.dishType == 'Main Dish'">
+    
+            <img src="../../assets/staticImages/dessert.jpg" *ngIf="recipe.imageUrl == '' && recipe.dishType == 'Dessert'">
+    
+            <img src="../../assets/staticImages/snack.jpg" *ngIf="recipe.imageUrl == '' && recipe.dishType == 'Snack'">
+            
+            <div class="info">
+                <h2> Ingredients</h2>
+                <ul>
+                    <li *ngFor="let ingredient of recipe.ingredients"><strong> {{ingredient}} </strong> </li>
+    
+    
+                </ul>
+            </div>
+    
+    
+        </div>
+    
+    </div>
+</div> -->

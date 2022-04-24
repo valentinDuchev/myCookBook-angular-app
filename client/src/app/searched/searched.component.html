@@ -1,0 +1,59 @@
+<div class="row">
+    <div class="column">
+
+        <h3>Recipes</h3>
+
+        <span *ngIf="recipes.length == 0"> There are no recipes with this criteria</span>
+
+
+
+
+        <div class="courses-container" *ngFor="let recipe of finalData.recipes">
+            <div class="course">
+                <div class="course-preview">
+                    <!-- <h6>Course-1</h6> -->
+                    <h4>{{recipe.dishType}}</h4>
+                    <h5>{{recipe.caloriesServing}} kcal/serving</h5>
+                    <h5>Likes: {{recipe.likes}}</h5>
+                </div>
+                <div class="course-info">
+                    <h6>Author: {{recipe.author.email}}</h6>
+                    <h2>{{recipe.name}}</h2>
+                    <a routerLink="/details/{{recipe._id}}">Details</a>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+    <div class="column">
+
+        <h3>Users</h3>
+
+        <span *ngIf="users.length == 0"> There are no users with this criteria</span>
+
+        <div class="courses-container" *ngFor="let user of finalData.users">
+            <div class="course">
+                <div class="course-preview">
+                    <img *ngIf="user.gender == 'Male'"
+                        src="../../assets/staticImages/male.jpg">
+
+                    <img *ngIf="user.gender == 'Female'"
+                        src="../../assets/staticImages/female.jpg">
+                </div>
+
+                
+                <div class="course-info">
+                    <!-- <h6>Course-1</h6> -->
+                    <h4>{{user.firstName}} {{user.lastName}}</h4>
+                    <h5>{{user.email}}</h5>
+                    <h6>Rank: </h6>
+                    <a routerLink="/profile/{{user.email}}">Details</a>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>

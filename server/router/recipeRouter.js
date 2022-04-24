@@ -1,5 +1,5 @@
 const { getAllRecipes, createRecipe, getById, updateById, deleteById } = require('../controllers/recipeController');
-const { getUserByEmail, getUserById } = require('../controllers/userController');
+const { getUserByEmail, getUserById, getAllUsers } = require('../controllers/userController');
 
 const { isUser, parseJwt } = require('../middlewares/auth');
 
@@ -51,6 +51,42 @@ router.post('/recipes', isUser, async (req, res) => { //TODO Add isUser middlewa
 
         const result = await createRecipe(data);
         user.posted.push(result)
+
+        user.rating += 40;
+        if (user.rating <= 199) {
+            user.rank = 1;
+            user.level = 'Bronze'
+        } else if (user.rating > 199 && user.rating < 500) {
+            user.rank = 2; 
+            user.level = 'Bronze'
+        } else if (user.rating > 499 && user.rating < 800) {
+            user.rank = 3;
+            user.level = 'Silver'
+        } else if (user.rating > 799 && user.rating < 1400) {
+            user.rank = 4;
+            user.level = 'Silver'
+        } else if (user.rating > 1399 && user.rating < 2100) {
+            user.rank = 5;
+            user.level = 'Silver'
+        } else if (user.rating > 2099 && user.rating < 3000) {
+            user.rank = 6;
+            user.level = 'Gold'
+        } else if (user.rating > 2999 && user.rating < 4500) {
+            user.rank = 7;
+            user.level = 'Gold'
+        } else if (user.rating > 4499 && user.rating < 7000) {
+            user.rank = 8;
+            user.level = 'Gold'
+        } else if (user.rating > 6999 && user.rating < 10500) {
+            user.rank = 9;
+            user.level = 'Platinum'
+        } else if (user.rating > 10499 && user.rating < 16000) {
+            user.rank = 10;
+            user.level = 'Platinum'
+        } else if (user.rating > 15999) {
+            user.rank = 11;
+            user.level = 'Diamond'
+        }
         await user.save();
 
         res.status(201).json({ result, message: 'Recipe created successfully' });
@@ -156,6 +192,42 @@ router.get(`/recipes/:id/like`, isUser, async (req, res) => {
         user.liked.push(recipe);
         author.totalRecipeLikes += 1;
 
+        author.rating += 20;
+        if (user.rating <= 199) {
+            user.rank = 1;
+            user.level = 'Bronze'
+        } else if (user.rating > 199 && user.rating < 500) {
+            user.rank = 2; 
+            user.level = 'Bronze'
+        } else if (user.rating > 499 && user.rating < 800) {
+            user.rank = 3;
+            user.level = 'Silver'
+        } else if (user.rating > 799 && user.rating < 1400) {
+            user.rank = 4;
+            user.level = 'Silver'
+        } else if (user.rating > 1399 && user.rating < 2100) {
+            user.rank = 5;
+            user.level = 'Silver'
+        } else if (user.rating > 2099 && user.rating < 3000) {
+            user.rank = 6;
+            user.level = 'Gold'
+        } else if (user.rating > 2999 && user.rating < 4500) {
+            user.rank = 7;
+            user.level = 'Gold'
+        } else if (user.rating > 4499 && user.rating < 7000) {
+            user.rank = 8;
+            user.level = 'Gold'
+        } else if (user.rating > 6999 && user.rating < 10500) {
+            user.rank = 9;
+            user.level = 'Platinum'
+        } else if (user.rating > 10499 && user.rating < 16000) {
+            user.rank = 10;
+            user.level = 'Platinum'
+        } else if (user.rating > 15999) {
+            user.rank = 11;
+            user.level = 'Diamond'
+        }
+
         await recipe.save()
         await user.save();
         await author.save()
@@ -194,6 +266,41 @@ router.get('/recipes/:id/dislike', isUser, async (req, res) => {
         recipe.peopleDisliked.push(user);
         user.disliked += 1;
         author.totalRecipeDislikes += 1;
+        author.rating -= 10;
+        if (user.rating <= 199) {
+            user.rank = 1;
+            user.level = 'Bronze'
+        } else if (user.rating > 199 && user.rating < 500) {
+            user.rank = 2; 
+            user.level = 'Bronze'
+        } else if (user.rating > 499 && user.rating < 800) {
+            user.rank = 3;
+            user.level = 'Silver'
+        } else if (user.rating > 799 && user.rating < 1400) {
+            user.rank = 4;
+            user.level = 'Silver'
+        } else if (user.rating > 1399 && user.rating < 2100) {
+            user.rank = 5;
+            user.level = 'Silver'
+        } else if (user.rating > 2099 && user.rating < 3000) {
+            user.rank = 6;
+            user.level = 'Gold'
+        } else if (user.rating > 2999 && user.rating < 4500) {
+            user.rank = 7;
+            user.level = 'Gold'
+        } else if (user.rating > 4499 && user.rating < 7000) {
+            user.rank = 8;
+            user.level = 'Gold'
+        } else if (user.rating > 6999 && user.rating < 10500) {
+            user.rank = 9;
+            user.level = 'Platinum'
+        } else if (user.rating > 10499 && user.rating < 16000) {
+            user.rank = 10;
+            user.level = 'Platinum'
+        } else if (user.rating > 15999) {
+            user.rank = 11;
+            user.level = 'Diamond'
+        }
 
         await recipe.save();
         await author.save();
@@ -206,6 +313,48 @@ router.get('/recipes/:id/dislike', isUser, async (req, res) => {
         res.json({ message: err.message })
     }
 
+})
+
+router.get('/search/:param', async (req, res) => {
+    const param = req.params.param;
+    console.log(param)
+    const recipes =  (await getAllRecipes())
+    const filteredRecipes = [];
+    for (let recipe of recipes) {
+        if(((recipe.name).toString().toLowerCase()).includes(param.toString().toLowerCase())) {
+            filteredRecipes.push(recipe);
+        }
+    }
+
+    console.log('===')
+
+    for (let filteredRecipe of filteredRecipes) {
+        const authorId = filteredRecipe.author;
+        const author = await getUserById(authorId);
+        filteredRecipe.author = author;
+    }
+
+    const users = await getAllUsers();
+    const filteredUsers = [];
+    for (let user of users) {
+        if (user.email.toString().toLowerCase().includes(param.toString().toLocaleLowerCase())) {
+            filteredUsers.push(user);
+        }
+        if (user.firstName.toString().toLowerCase().includes(param.toString().toLowerCase())) {
+            if (filteredUsers.includes(user) == false) {
+                filteredUsers.push(user);
+            }
+        }
+        if (user.lastName.toString().toLowerCase().includes(param.toString().toLowerCase())) {
+            if (filteredUsers.includes(user) == false) {
+                filteredUsers.push(user);
+            }
+        }
+    }
+    
+    console.log(filteredUsers)
+    res.json({ recipes: filteredRecipes, users: filteredUsers })
+    
 })
 
 

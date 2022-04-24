@@ -44,6 +44,9 @@ export class ProfilePageComponent implements OnInit {
         this.data.disliked = res.userData.disliked
         this.data.totalRecipeLikes = res.userData.totalRecipeLikes;
         this.data.totalRecipeDislikes = res.userData.totalRecipeDislikes;
+        this.data.level = res.userData.level;
+        this.data.rank = res.userData.rank;
+        this.data.rating = res.userData.rating;
 
         for (let recipe of this.data.posted) {
           const options = { year: 'numeric', month: 'long', day: 'numeric' };

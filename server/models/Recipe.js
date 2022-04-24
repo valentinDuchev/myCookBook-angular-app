@@ -11,12 +11,14 @@ const recipeSchema = new Schema({
     },
     dishType: { type: String, required: [true, 'Dish Type is required'] },
     imageUrl: {
-        type: String, 
-        default: 'https://loveincorporated.blob.core.windows.net/contentimages/gallery/d9e900e4-212e-4c3d-96d5-cb14a023c659-worlds-most-delicious-dishes.jpg', 
+        type: String,
         validate: {
             validator(value) {
-                return URL_PATTERN.test(value)
-            }, message: 'The recipe image must be valid URL (Example: "https://upload.wikimedia.org/wikipedia/commons/6/6d/Good_Food_Display_-_NCI_Visuals_Online.jpg")'
+                if (value != '') {
+                    console.log(value)
+                    return URL_PATTERN.test(value)
+                }
+            }, message: 'The recipe image must be valid URL or empty string (Example: "https://upload.wikimedia.org/wikipedia/commons/6/6d/Good_Food_Display_-_NCI_Visuals_Online.jpg")'
         }
     },
     servings: { type: Number, min: [1, 'There must be at least one serving'] },

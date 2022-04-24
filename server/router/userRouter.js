@@ -91,7 +91,10 @@ router.get('/users/myProfile', isUser, async (req, res) => {
             liked: user.liked, 
             disliked: user.disliked, 
             totalRecipeLikes: user.totalRecipeLikes, 
-            totalRecipeDislikes: user.totalRecipeDislikes
+            totalRecipeDislikes: user.totalRecipeDislikes, 
+            level: user.level, 
+            rank: user.rank, 
+            rating: user.rating
         }
 
         res.json({ message: "Successfully accessed profile page", userData })
