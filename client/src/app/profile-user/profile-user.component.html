@@ -54,7 +54,7 @@
                             This user has no posts yet
                         </div>
 
-                        <div class="row" *ngFor="let recipe of data.posted">
+                        <div class="row" *ngFor="let recipe of data.posted  | paginate: {itemsPerPage: 4, currentPage: pagePosted }">
                             <div class="card text-center">
                                 <div class="card-body">
                                     <h5 class="card-title">{{recipe.name}}</h5>
@@ -65,6 +65,10 @@
                                 </div>
                             </div>
                         </div>
+
+                        <pagination-controls (pageChange)="pagePosted = $event"></pagination-controls>
+
+
                     </div>
                 </div>
             </div>

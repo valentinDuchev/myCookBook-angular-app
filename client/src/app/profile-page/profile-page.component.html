@@ -63,7 +63,7 @@
                             This user has no posts yet
                         </div>
 
-                        <div class="row" *ngFor="let recipe of data.posted | paginate: { id: 'pagination-1', itemsPerPage: 2, currentPage: pagePosted }">
+                        <div class="row" *ngFor="let recipe of data.posted | paginate: { id: 'pagination-1', itemsPerPage: 4, currentPage: pagePosted }">
                             <div class="card text-center">
                                 <div class="card-body">
                                     <h5 class="card-title">{{recipe.name}}</h5>
@@ -90,7 +90,7 @@
                             This user hasn't liked anything yet
                         </div>
 
-                        <div class="row" *ngFor="let recipe of data.liked | paginate: { id: 'pagination-2', itemsPerPage: 5, currentPage: pageLiked }">
+                        <div class="row" *ngFor="let recipe of data.liked | paginate: { id: 'pagination-2', itemsPerPage: 4, currentPage: pageLiked }">
                             <div class="card text-center">
                                 <div class="card-body">
                                     <h5 class="card-title">{{recipe.name}}</h5>

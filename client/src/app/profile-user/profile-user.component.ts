@@ -13,6 +13,8 @@ export class ProfileUserComponent implements OnInit {
 
   email: string = '';
 
+  pagePosted: number = 1;
+
 
   constructor(
     private activatedRoute: ActivatedRoute, 
