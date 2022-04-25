@@ -35,4 +35,12 @@ export class RecipeService {
   search(param: any): Observable<any> {
     return this.http.get<any>(`http://localhost:3000/api/search/${param}`);
   }
+
+  editRecipe (id: any, data: any): Observable<any> {
+    return this.http.put<any>(`http://localhost:3000/api/recipes/${id}`, data);
+  }
+
+  deleteRecipe (id: any): Observable<any> {
+    return this.http.delete<any>(`http://localhost:3000/api/recipes/${id}`);
+  }
 }

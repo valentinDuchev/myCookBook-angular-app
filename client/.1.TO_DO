@@ -6,33 +6,47 @@ TODO
 
 <DONE> --> Add User / Author to create
 
---> Add Edit Functionality for Author of the current recipe
-
---> Add browse in file system in create for choosing an image in the file of the computer
-
 <DONE> --> Add About Page
 
 <DONE> --> Add Home Page
 
+<DONE> --> Add Edit Functionality for Author of the current recipe
+
 --> Add html, css and etc to home and about page
-
-<DONE> --> Add Search Functionality
-
---> Add Pagination in the catalog page
-
-<DONE> --> Add sorting functionality in the catalog page
 
 --> Add better html+css to the footer
 
+<DONE> --> Add Search Functionality
+
+<DONE> --> Add Pagination in the catalog page
+
+<DONE> --> Add sorting functionality in the catalog page
+
 --> Fix all guards in the back-end
-
-<DONE> --> Add guards to the front-end   
-
---> Add choose profile picture for the user profile
-------> Add Default profile picture depending on the choosen gender
 
 --> Fix back-end logout
 
+<DONE> --> Add guards to the front-end   
+
+<DONE> --> Add ranking and index for users 
+
+--> Fix Recipes Disliked, Total Likes of Recipe, Total Dislikes of Recipes in different user page
+
 --> Fix ingredients when create -> they must be in array
 
---> Add ranking and index for users 
+--------------------------------------------------------------------------------------------------------------------------------
+
+--> Add browse in file system in create for choosing an image in the file of the computer
+
+--> Add choose profile picture for the user profile
+
+----------------------------------------------------
+
+<DONE> --> When edit an recipe, the change doesnt appear in the profile page - fix that
+
+<DONE> --> The change doesnt appear also in the users that has liked/Disliked this recipe - the count of liked/disliked recipes and the 
+    array of liked/disliked recipes of those users should update when an recipe was deleted - fix that
+
+---------------------------------------------------
+ 
+ --> Fix reload in pagination 

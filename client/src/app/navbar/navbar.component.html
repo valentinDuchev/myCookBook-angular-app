@@ -11,9 +11,15 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item" *ngIf="hasUser">
-                <a class="nav-link" routerLink="/myProfile">Profile <span class="" ></span></a>   <!--TODO-->
+
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/allUsers">All Users <span class="" ></span></a>   <!--TODO-->
             </li>
+
+            <li class="nav-item" *ngIf="hasUser">
+                <a class="nav-link" routerLink="/myProfile">My Profile <span class="" ></span></a>   <!--TODO-->
+            </li>
+
             <li class="nav-item">
                 <a class="nav-link" routerLink="/catalog">Catalog</a>
             </li>
@@ -21,6 +27,7 @@
             <li class="nav-item">
                 <a class="nav-link" routerLink="/create" *ngIf="hasUser">Create</a>
             </li>
+
             <li class="nav-item">
                 <a class="nav-link" routerLink="/about">About</a>  <!--TODO-->
             </li>

@@ -110,3 +110,7 @@ body{
     margin-right: 10px; 
 
 } */
+
+.tab-pane >h4 {
+    margin-top: 20px
+}

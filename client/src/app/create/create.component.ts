@@ -60,6 +60,7 @@ export class CreateComponent implements OnInit {
       this.data.fatServing = formData.form.controls.fatServing.value;
       this.data.proteinServing = formData.form.controls.proteinServing.value;
       this.data.details = formData.form.controls.details.value;
+      this.data.proteinRecipe = formData.controls.proteinRecipe.value;
 
       this.htmlForm.reset();
 

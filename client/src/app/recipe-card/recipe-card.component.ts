@@ -12,6 +12,8 @@ export class RecipeCardComponent implements OnInit {
   allRecipes!: any;
   singleRecipe!: any;
 
+  page: number = 1;
+
   response: any = {
 
   }
@@ -47,7 +49,7 @@ export class RecipeCardComponent implements OnInit {
         } else if (res.message == 'Author cannot like their own recipes') {
           alert(res.message)
         } else {
-          res.then(window.location.reload())
+          res.then(alert('Succesfully liked'))
         }
       }
     )

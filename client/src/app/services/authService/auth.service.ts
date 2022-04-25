@@ -30,4 +30,10 @@ export class AuthService {
   getUserProfileInfo (email: any) {
     return this.http.get<any>(`http://localhost:3000/api/users/userProfile/${email}`);
   }
+
+  getAllProfiles () {
+    return this.http.get<any>('http://localhost:3000/api/users/getAll');
+  }
+
+  
 }

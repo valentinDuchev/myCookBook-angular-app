@@ -5,10 +5,10 @@
                 <div class="profile-img">
 
                     <img *ngIf="data.gender == 'Female'"
-                        src="https://neilstonpipeband.com/wp-content/uploads/2020/09/anonymous-female-icon-11.jpg.png"
+                        src="../../assets/staticImages/female.jpg"
                         alt="" />
                     <img *ngIf="data.gender == 'Male'"
-                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKsi9Fr2wXH4VSiJVPj699LjORRidri6dc3PDeKvxJO6iJ6SFPVVmM_PfGZfX96SaDrSk&usqp=CAU"
+                        src="../../assets/staticImages/male.jpg"
                         alt="" />
 
                     <div class="file btn btn-lg btn-primary">
@@ -27,7 +27,7 @@
                         {{data.email}}
                     </h4>
 
-                    <h5> {{data.level}} Member </h5>
+                    <h6> {{data.level}} Member </h6>
                     <h6>Rank: {{data.rank}} </h6>
                     <h6>Rating: {{data.rating}} </h6>
 
@@ -63,7 +63,7 @@
                             This user has no posts yet
                         </div>
 
-                        <div class="row" *ngFor="let recipe of data.posted">
+                        <div class="row" *ngFor="let recipe of data.posted | paginate: { id: 'pagination-1', itemsPerPage: 2, currentPage: pagePosted }">
                             <div class="card text-center">
                                 <div class="card-body">
                                     <h5 class="card-title">{{recipe.name}}</h5>
@@ -74,6 +74,8 @@
                                 </div>
                             </div>
                         </div>
+
+                        <pagination-controls id="pagination-1" (pageChange)="pagePosted = $event"></pagination-controls>
                     </div>
                 </div>
             </div>
@@ -88,7 +90,7 @@
                             This user hasn't liked anything yet
                         </div>
 
-                        <div class="row" *ngFor="let recipe of data.liked">
+                        <div class="row" *ngFor="let recipe of data.liked | paginate: { id: 'pagination-2', itemsPerPage: 5, currentPage: pageLiked }">
                             <div class="card text-center">
                                 <div class="card-body">
                                     <h5 class="card-title">{{recipe.name}}</h5>
@@ -99,6 +101,9 @@
                                 </div>
                             </div>
                         </div>
+
+                        <pagination-controls id="pagination-2" (pageChange)="pageLiked = $event"></pagination-controls>
+
                     </div>
                 </div>
 

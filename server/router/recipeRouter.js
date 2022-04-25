@@ -21,11 +21,8 @@ router.post('/recipes', isUser, async (req, res) => { //TODO Add isUser middlewa
             throw new Error('You have to log in to create recipe.')
         }
 
-        
-
         const userData = parseJwt(token);
         const user = await getUserByEmail(userData.email);
-
 
         const data = {
             name: req.body.name,
@@ -43,7 +40,8 @@ router.post('/recipes', isUser, async (req, res) => { //TODO Add isUser middlewa
             fatServing: req.body.fatServing,
             proteinServing: req.body.proteinServing,
             dateCreated: Date.now(),
-            author: user._id
+            author: user._id,
+            details: req.body.details
         };
 
         // console.log(req.headers)
@@ -57,7 +55,7 @@ router.post('/recipes', isUser, async (req, res) => { //TODO Add isUser middlewa
             user.rank = 1;
             user.level = 'Bronze'
         } else if (user.rating > 199 && user.rating < 500) {
-            user.rank = 2; 
+            user.rank = 2;
             user.level = 'Bronze'
         } else if (user.rating > 499 && user.rating < 800) {
             user.rank = 3;
@@ -130,7 +128,8 @@ router.get('/recipes/:id', async (req, res) => {
             proteinServing: data.proteinServing,
             author: user.email,
             likes: data.likes,
-            dislikes: data.dislikes
+            dislikes: data.dislikes,
+            details: data.details
         }
 
         res.status(200).json({ message: "Successfully opened details", result });
@@ -144,27 +143,101 @@ router.put('/recipes/:id', isUser, async (req, res) => {
 
     const id = req.params.id;
 
+    console.log(req.body)
+
     const data = {
         name: req.body.name,
         dishType: req.body.dishType,
         imageUrl: req.body.imageUrl,
         ingredients: req.body.ingredients,
         preparation: req.body.preparation,
-        calories: req.body.calories,
-        carbs: req.body.carbs,
-        fat: req.body.fat,
-        protein: req.body.protein
+        caloriesRecipe: req.body.caloriesRecipe,
+        carbsRecipe: req.body.carbsRecipe,
+        fatRecipe: req.body.fatRecipe,
+        proteinRecipe: req.body.proteinRecipe,
+        caloriesServing: req.body.caloriesServing,
+        carbsServing: req.body.carbsServing,
+        fatServing: req.body.fatServing,
+        proteinServing: req.body.proteinServing,
+        details: req.body.details,
     };
 
     const result = await updateById(id, data);
-    res.status(201).json(result);
+    res.status(201).json({ result, message: 'Successfully edited' });
 });
 
 router.delete('/recipes/:id', isUser, async (req, res) => {
     const id = req.params.id;
 
+    const recipe = await getById(id);
+    const userId = recipe.author;
+    const user = await getUserById(userId);
+    user.rating -= 40;
+    user.totalRecipeLikes -= Number(recipe.likes);
+    user.totalRecipeDislikes -= Number(recipe.dislikes);
+
+    for (let i = 0; i < user.posted.length; i++) {
+        let recipeArr = user.posted[i];
+        if (recipeArr._id.toString() == recipe._id.toString()){
+            user.posted.splice(i, 1);
+        }
+    }
+
+    
+
+    for (let disliked of recipe.peopleDisliked) {
+        const user = await getUserById(disliked);
+        console.log(user.disliked)
+        user.disliked -= 1;
+        await user.save()
+    }
+
+    for (let liked of recipe.peopleLiked) {
+        const user = await getUserById(liked);
+        console.log(user.liked)
+
+        user.liked -= 1;
+        await user.save()
+    }
+
+    if (user.rating <= 199) {
+        user.rank = 1;
+        user.level = 'Bronze'
+    } else if (user.rating > 199 && user.rating < 500) {
+        user.rank = 2;
+        user.level = 'Bronze'
+    } else if (user.rating > 499 && user.rating < 800) {
+        user.rank = 3;
+        user.level = 'Silver'
+    } else if (user.rating > 799 && user.rating < 1400) {
+        user.rank = 4;
+        user.level = 'Silver'
+    } else if (user.rating > 1399 && user.rating < 2100) {
+        user.rank = 5;
+        user.level = 'Silver'
+    } else if (user.rating > 2099 && user.rating < 3000) {
+        user.rank = 6;
+        user.level = 'Gold'
+    } else if (user.rating > 2999 && user.rating < 4500) {
+        user.rank = 7;
+        user.level = 'Gold'
+    } else if (user.rating > 4499 && user.rating < 7000) {
+        user.rank = 8;
+        user.level = 'Gold'
+    } else if (user.rating > 6999 && user.rating < 10500) {
+        user.rank = 9;
+        user.level = 'Platinum'
+    } else if (user.rating > 10499 && user.rating < 16000) {
+        user.rank = 10;
+        user.level = 'Platinum'
+    } else if (user.rating > 15999) {
+        user.rank = 11;
+        user.level = 'Diamond'
+    }
+    await user.save();
+
     await deleteById(id);
-    res.status(200).json({ message: "Deleted Successfully" })
+    res.status(200).json({ message: "Successfully deleted" })
 })
 
 router.get(`/recipes/:id/like`, isUser, async (req, res) => {
@@ -189,7 +262,8 @@ router.get(`/recipes/:id/like`, isUser, async (req, res) => {
 
         recipe.likes += 1;
         recipe.peopleLiked.push(user)
-        user.liked.push(recipe);
+        // user.liked.push(recipe);
+        user.liked += 1;
         author.totalRecipeLikes += 1;
 
         author.rating += 20;
@@ -197,7 +271,7 @@ router.get(`/recipes/:id/like`, isUser, async (req, res) => {
             user.rank = 1;
             user.level = 'Bronze'
         } else if (user.rating > 199 && user.rating < 500) {
-            user.rank = 2; 
+            user.rank = 2;
             user.level = 'Bronze'
         } else if (user.rating > 499 && user.rating < 800) {
             user.rank = 3;
@@ -271,7 +345,7 @@ router.get('/recipes/:id/dislike', isUser, async (req, res) => {
             user.rank = 1;
             user.level = 'Bronze'
         } else if (user.rating > 199 && user.rating < 500) {
-            user.rank = 2; 
+            user.rank = 2;
             user.level = 'Bronze'
         } else if (user.rating > 499 && user.rating < 800) {
             user.rank = 3;
@@ -318,10 +392,10 @@ router.get('/recipes/:id/dislike', isUser, async (req, res) => {
 router.get('/search/:param', async (req, res) => {
     const param = req.params.param;
     console.log(param)
-    const recipes =  (await getAllRecipes())
+    const recipes = (await getAllRecipes())
     const filteredRecipes = [];
     for (let recipe of recipes) {
-        if(((recipe.name).toString().toLowerCase()).includes(param.toString().toLowerCase())) {
+        if (((recipe.name).toString().toLowerCase()).includes(param.toString().toLowerCase())) {
             filteredRecipes.push(recipe);
         }
     }
@@ -351,10 +425,10 @@ router.get('/search/:param', async (req, res) => {
             }
         }
     }
-    
+
     console.log(filteredUsers)
     res.json({ recipes: filteredRecipes, users: filteredUsers })
-    
+
 })
 
 

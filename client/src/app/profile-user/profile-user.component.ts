@@ -43,6 +43,8 @@ export class ProfileUserComponent implements OnInit {
         this.data.gender = res.userData.gender
         this.data.liked = res.userData.liked
         this.data.posted = res.userData.posted
+        this.data.rank = res.userData.rank
+        this.data.rating = res.userData.rating
 
         for (let recipe of this.data.posted) {
           const options = { year: 'numeric', month: 'long', day: 'numeric' };

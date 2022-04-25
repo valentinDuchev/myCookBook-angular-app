@@ -1,4 +1,4 @@
-<div class="column">
+<div class="column" *ngIf="singleRecipe.length != 0">
     <div class="btn-group">
         <h4>Filter by Type:</h4>
         <button (click)="filter('appetizer')">Appetizer</button>
@@ -10,7 +10,7 @@
     </div>
 </div>
 
-<div class="column">
+<div class="column" *ngIf="singleRecipe.length != 0">
     <div class="btn-group">
         <h4>Sort by:</h4>
         <button (click)="filter('likes')">Likes</button>
@@ -21,10 +21,10 @@
     </div>
 </div>
 
-<!-- <span *ngIf="singleRecipe.length == 0">
+ <span *ngIf="singleRecipe.length == 0">
     There are no available recipes of this type.
-</span> -->
-<div id="container" *ngFor="let recipe of singleRecipe">
+</span>
+<div id="container" *ngFor="let recipe of singleRecipe | paginate: { itemsPerPage: 10, currentPage: page}">
 
 
     <div class="product-details">
@@ -91,3 +91,5 @@
     </div>
 
 </div>
+
+<pagination-controls (pageChange)="page = $event"></pagination-controls>

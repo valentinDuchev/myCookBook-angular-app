@@ -24,6 +24,9 @@ import { ProfilePageComponent } from './profile-page/profile-page.component';
 import { ProfileUserComponent } from './profile-user/profile-user.component';
 import { SearchService } from './services/searchService/search.service';
 import { SearchedComponent } from './searched/searched.component';
+import { AllUsersComponent } from './all-users/all-users.component';
+import { EditComponent } from './edit/edit.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -40,6 +43,8 @@ import { SearchedComponent } from './searched/searched.component';
     ProfilePageComponent,
     ProfileUserComponent,
     SearchedComponent,
+    AllUsersComponent,
+    EditComponent,
   ],
   imports: [
     BrowserModule,
@@ -54,11 +59,14 @@ import { SearchedComponent } from './searched/searched.component';
       { path: 'about', component: AboutPageComponent}, 
       { path: 'myProfile', component: ProfilePageComponent, canActivate: [AuthGuard] }, 
       { path: 'profile/:email', component: ProfileUserComponent }, 
-      { path: 'searched', component: SearchedComponent}
+      { path: 'searched', component: SearchedComponent}, 
+      { path: 'allUsers', component: AllUsersComponent }, 
+      { path: 'edit/:id', component: EditComponent, canActivate: [AuthGuard]}
       // { path: 'recipes/:id/like', component: , canActivate: [AuthGuard] }
     ]),
     HttpClientModule,
-    FormsModule
+    FormsModule, 
+    NgxPaginationModule
   ],
   providers: [
     RecipeService,

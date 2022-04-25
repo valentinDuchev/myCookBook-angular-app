@@ -20,7 +20,7 @@ const userSchema = new Schema({
     seqAnswer: { type: String, required: [true, 'Sequrity question is required'] },
     date: { type: Date, drfault: Date.now() },
     posted: { type: [recipeSchema] },
-    liked: { type: [recipeSchema] }, 
+    liked: { type: Number, default: 0 }, 
     disliked: { type: Number, default: 0}, 
     totalRecipeLikes: { type: Number, default: 0}, 
     totalRecipeDislikes: { type: Number, default: 0 }, 

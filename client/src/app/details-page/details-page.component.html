@@ -1,99 +1,113 @@
 <section id="deatils-page">
-    <div class="wrapper">
-      <div class="product-img">
+  <div class="wrapper">
+    <div class="product-img">
 
 
-        <img src="{{data.imageUrl}}" alt="" *ngIf="data.imageUrl != ''">
+      <img src="{{data.imageUrl}}" alt="" *ngIf="data.imageUrl != ''">
 
-        <img src="../../assets/staticImages/appetizer.jpg" *ngIf="data.imageUrl == '' && data.dishType == 'Appetizer'">
+      <img src="../../assets/staticImages/appetizer.jpg" *ngIf="data.imageUrl == '' && data.dishType == 'Appetizer'">
 
-        <img src="../../assets/staticImages/main.jpg" *ngIf="data.imageUrl == '' && data.dishType == 'Main Dish'">
+      <img src="../../assets/staticImages/main.jpg" *ngIf="data.imageUrl == '' && data.dishType == 'Main Dish'">
 
-        <img src="../../assets/staticImages/dessert.jpg" *ngIf="data.imageUrl == '' && data.dishType == 'Dessert'">
+      <img src="../../assets/staticImages/dessert.jpg" *ngIf="data.imageUrl == '' && data.dishType == 'Dessert'">
 
-        <img src="../../assets/staticImages/snack.jpg" *ngIf="data.imageUrl == '' && data.dishType == 'Snack'">
+      <img src="../../assets/staticImages/snack.jpg" *ngIf="data.imageUrl == '' && data.dishType == 'Snack'">
 
 
-        <div class="product-text-details">
-          <h1><strong>{{data.name}}</strong></h1>
-          <h2>Author: <a routerLink="/profile/{{data.author}}">{{data.author}}</a></h2>
-          <h4>Type: <strong>{{data.dishType}}</strong> </h4>
-          <h5>Servings: <strong> {{data.servings}} </strong></h5>
-  
-        </div>
-  
-  
-        <span class="first">
-          <a (click)="like(data._id)"></a>
-          <!-- <a>cska</a> -->
-          <p> {{data.likes}} <i class="fa fa-thumbs-o-up like-count" aria-hidden="true"></i> </p>
-        </span>
-        <span class="second">
-          <p> <i class="fa fa-thumbs-o-down disilke-count-dislike " aria-hidden="true"></i>
-          {{data.dislikes}}</p>
-  
-          <a (click)="dislike(data._id)"></a>
-        </span>
-  
-        <div class="product-btn">
-  
-  
-          <!-- Only for registered user and creator of the housing offer-->
-  
-        </div>
+      <div class="product-text-details">
+        <h1><strong>{{data.name}}</strong></h1>
+        <h2>Author: <a routerLink="/profile/{{data.author}}">{{data.author}}</a></h2>
+        <h4>Type: <strong>{{data.dishType}}</strong> </h4>
+        <h5>Servings: <strong> {{data.servings}} </strong></h5>
+
       </div>
-      <div class="product-info">
-        <div class="product-text">
-  
-          <div class="preparation-div">
-            <h4>Preparation</h4>
-            <p>
-              {{data.preparation}}
-            </p>
-          </div>
-          <div class="ingredients-div">
-            <h4>Ingredients</h4>
-            <p>
-              {{data.ingredients}}
-            </p>
-          </div>
-  
-        </div>
-        <div class="nutri-details-heading">
-          <h4>Nutrition details</h4>
-        </div>
-  
-        <div class="row-details-macros">
-          <div class="column-details-macros">
-            <div>
-              <ul class="check-list">
-                <h5>For 1 Serving</h5>
-                <li><strong>Calories: </strong>{{data.caloriesServing}}</li>
-                <li><strong>Carbohydrates: </strong>{{data.carbsServing}}</li>
-                <li><strong>Fat: </strong> {{data.fatServing}}</li>
-                <li><strong>Protein: </strong> {{data.proteinServing}}</li>
-              </ul>
-            </div>
-          </div>
-          <div class="column-details-macros second-macros-details">
-            <div>
-  
-              <ul class="check-list">
-                <h5>For the whole recipe</h5>
-                <li><strong>Calories: </strong>{{data.caloriesRecipe}}</li>
-                <li><strong>Carbohydrates: </strong>{{data.carbsRecipe}}</li>
-                <li><strong>Fat: </strong>{{data.fatRecipe}}</li>
-                <li><strong>Protein: </strong>{{data.proteinRecipe}}</li>
-              </ul>
-  
-            </div>
-          </div>
-        </div>
-  
+
+      <div class="edit-delete-buttons" *ngIf="data.author.toString() == currentUserEmail.toString()">
+
+        <button (click)="editRecipe(data._id)" type="button" id="edit-btn" class="btn btn-danger edit-button" *ngIf="data.author.toString() == currentUserEmail.toString()">Edit</button>
+
+        <button (click)="deleteRecipe(data._id)" type="button" class="btn btn-danger delete-button" *ngIf="data.author.toString() == currentUserEmail.toString()">Delete</button>
+
+        <p class="likes-count-over">{{data.likes}} Likes  </p>
+
+        <p class="dislikes-count-over">{{data.dislikes}} Dislikes</p>
+
+      </div>
+
+
+
+      <span class="first">
+        <a (click)="like(data._id)" *ngIf="data.author.toString() != currentUserEmail.toString()"></a>
+        <p *ngIf="data.author.toString() != currentUserEmail.toString()"> {{data.likes}} <i class="fa fa-thumbs-o-up like-count" aria-hidden="true"></i> </p>
+      </span>
+
+      <span class="second">
+        <p *ngIf="data.author.toString() != currentUserEmail.toString()"> <i class="fa fa-thumbs-o-down disilke-count-dislike " aria-hidden="true"></i>
+          {{data.dislikes}}</p>
+        <a (click)="dislike(data._id)" *ngIf="data.author.toString() != currentUserEmail.toString()"></a>
+      </span>
+
+
+
+      <div class="product-btn">
+
+
+        <!-- Only for registered user and creator of the housing offer-->
+
       </div>
     </div>
-  
-  
-    
-  
-  </section>
+    <div class="product-info">
+      <div class="product-text">
+
+        <div class="preparation-div">
+          <h4>Preparation</h4>
+          <p>
+            {{data.preparation}}
+          </p>
+        </div>
+        <div class="ingredients-div">
+          <h4>Ingredients</h4>
+          <p>
+            {{data.ingredients}}
+          </p>
+        </div>
+
+      </div>
+      <div class="nutri-details-heading">
+        <h4>Nutrition details</h4>
+      </div>
+
+      <div class="row-details-macros">
+        <div class="column-details-macros">
+          <div>
+            <ul class="check-list">
+              <h5>For 1 Serving</h5>
+              <li><strong>Calories: </strong>{{data.caloriesServing}}</li>
+              <li><strong>Carbohydrates: </strong>{{data.carbsServing}}</li>
+              <li><strong>Fat: </strong> {{data.fatServing}}</li>
+              <li><strong>Protein: </strong> {{data.proteinServing}}</li>
+            </ul>
+          </div>
+        </div>
+        <div class="column-details-macros second-macros-details">
+          <div>
+
+            <ul class="check-list">
+              <h5>For the whole recipe</h5>
+              <li><strong>Calories: </strong>{{data.caloriesRecipe}}</li>
+              <li><strong>Carbohydrates: </strong>{{data.carbsRecipe}}</li>
+              <li><strong>Fat: </strong>{{data.fatRecipe}}</li>
+              <li><strong>Protein: </strong>{{data.proteinRecipe}}</li>
+            </ul>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+
+
+</section>

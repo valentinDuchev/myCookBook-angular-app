@@ -5,10 +5,10 @@
                 <div class="profile-img">
 
                     <img *ngIf="data.gender == 'Female'"
-                        src="https://neilstonpipeband.com/wp-content/uploads/2020/09/anonymous-female-icon-11.jpg.png"
+                        src="../../assets/staticImages/female.jpg"
                         alt="" />
                     <img *ngIf="data.gender == 'Male'"
-                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKsi9Fr2wXH4VSiJVPj699LjORRidri6dc3PDeKvxJO6iJ6SFPVVmM_PfGZfX96SaDrSk&usqp=CAU"
+                        src="../../assets/staticImages/male.jpg"
                         alt="" />
 
                     <div class="file btn btn-lg btn-primary">
@@ -26,6 +26,10 @@
                     <h5>
                         {{data.email}}
                     </h5>
+
+                    <h6> {{data.level}} Member </h6>
+                    <h6>Rank: {{data.rank}} </h6>
+                    <h6>Rating: {{data.rating}} </h6>
 
                     
                 </div>

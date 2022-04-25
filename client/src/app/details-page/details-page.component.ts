@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from '../services/authService/auth.service';
 import { RecipeService } from '../services/recipeService/recipe.service';
 
 @Component({
@@ -10,6 +11,8 @@ import { RecipeService } from '../services/recipeService/recipe.service';
 export class DetailsPageComponent implements OnInit {
 
   id: any;
+  isAuthor: any = false;
+  currentUserEmail: any = localStorage.getItem('email');
 
   data = {
     caloriesRecipe: '',
@@ -37,12 +40,13 @@ export class DetailsPageComponent implements OnInit {
   constructor
     (
       private activatedRoute: ActivatedRoute,
-      private recipeService: RecipeService
+      private recipeService: RecipeService,
+      private authService: AuthService,
+      private router: Router
     ) { }
 
   ngOnInit(): void {
     this.id = this.activatedRoute.snapshot.paramMap.get('id');
-    console.log(this.id);
     this.recipeService.getSingleRecipe(this.id)
       .subscribe(
         (res) => {
@@ -66,8 +70,12 @@ export class DetailsPageComponent implements OnInit {
             this.data.proteinServing = res.result.proteinServing,
             this.data.servings = res.result.servings,
             this.data.author = res.result.author
-        })
 
+          console.log(this.data.author)
+
+          console.log(this.currentUserEmail.toString() == this.data.author)
+
+        })
   }
 
   like(id: any) {
@@ -93,6 +101,21 @@ export class DetailsPageComponent implements OnInit {
           alert(res.message)
         } else {
           res.then(window.location.reload())
+        }
+      }
+    )
+  }
+
+  editRecipe(id: any) {
+    this.router.navigate([`edit/${id}`])
+  }
+
+  deleteRecipe(id: any) {
+    this.recipeService.deleteRecipe(id).subscribe(
+      (res) => {
+        if (res.message == 'Successfully deleted') {
+          alert(res.message);
+          this.router.navigate(['myProfile'])
         }
       }
     )

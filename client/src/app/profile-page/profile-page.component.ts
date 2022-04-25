@@ -24,6 +24,9 @@ export class ProfilePageComponent implements OnInit {
 
   dateLiked: any = ''
 
+  pagePosted: number = 1;
+  pageLiked: number = 1;
+
 
   constructor(private authService: AuthService) { }
 
@@ -47,6 +50,8 @@ export class ProfilePageComponent implements OnInit {
         this.data.level = res.userData.level;
         this.data.rank = res.userData.rank;
         this.data.rating = res.userData.rating;
+
+        console.log(this.data.gender)
 
         for (let recipe of this.data.posted) {
           const options = { year: 'numeric', month: 'long', day: 'numeric' };

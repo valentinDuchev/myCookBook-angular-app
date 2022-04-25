@@ -38,6 +38,7 @@ const recipeSchema = new Schema({
     peopleDisliked: { type: [ObjectId], ref: 'User' }, //TODO Change type to UserId
     dateCreated: { type: Date, default: Date.now() }, //TODO change type to Date and add Date.now functionality
     author: { type: ObjectId, ref: 'User', required: true },  //TODO change type to UserId
+    details: { type: String, default: ''}
 
 });
 

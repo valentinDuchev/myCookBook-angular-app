@@ -1,0 +1,23 @@
+<table id="customers">
+    <tr>
+        <th style="text-align: center">Name</th>
+        <th style="text-align: center">Email</th>
+        <th style="text-align: center">Level</th>
+        <th style="text-align: center">Rank</th>
+        <th style="text-align: center">Rating</th>
+        <th style="text-align: center"> Details</th>
+    </tr>
+    <tr *ngFor="let user of users | paginate: {
+                                    itemsPerPage: 10,
+                                    currentPage: page}">
+        <td style="width: 29%">{{user.firstName}} {{user.lastName}}</td>
+        <td style="width: 29%">{{user.email}}</td>
+        <td style="width: 10%"> {{user.level}}</td>
+        <td style="width: 10%">{{user.rank}}</td>
+        <td style="width: 10%">{{user.rating}}</td>
+        <td style="width: 8%"><a routerLink="/profile/{{user.email}}">Details</a></td>
+    </tr>
+
+</table>
+
+<pagination-controls (pageChange)="page = $event"></pagination-controls>

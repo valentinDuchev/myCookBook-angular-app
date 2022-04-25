@@ -1,4 +1,5 @@
-const { register, login, getUserByEmail, getUserById } = require('../controllers/userController');
+const { getAllRecipes } = require('../controllers/recipeController');
+const { register, login, getUserByEmail, getUserById, getAllUsers } = require('../controllers/userController');
 const { generateAccessToken, isGuest, isUser, parseJwt } = require('../middlewares/auth');
 
 const router = require('express').Router();
@@ -82,18 +83,35 @@ router.get('/users/myProfile', isUser, async (req, res) => {
 
         const tokenData = parseJwt(token);
         const user = await getUserByEmail(tokenData.email)
+        const recipes = await getAllRecipes();
+
+        const userPosted = [];
+        const userLiked = [];
+
+        for (let recipe of recipes) {
+            if (recipe.author.toString() == user._id.toString()) {
+                userPosted.push(recipe);
+            }
+
+            for (let liked of recipe.peopleLiked) {
+                if (liked.toString() == user._id.toString()) {
+                    userLiked.push(recipe);
+                }
+            }
+        }
+
         const userData = {
             firstName: user.firstName,
             lastName: user.lastName,
             gender: user.gender,
             email: user.email,
-            posted: user.posted,
-            liked: user.liked, 
-            disliked: user.disliked, 
-            totalRecipeLikes: user.totalRecipeLikes, 
-            totalRecipeDislikes: user.totalRecipeDislikes, 
-            level: user.level, 
-            rank: user.rank, 
+            posted: userPosted,
+            liked: userLiked,
+            disliked: user.disliked,
+            totalRecipeLikes: user.totalRecipeLikes,
+            totalRecipeDislikes: user.totalRecipeDislikes,
+            level: user.level,
+            rank: user.rank,
             rating: user.rating
         }
 
@@ -105,25 +123,63 @@ router.get('/users/myProfile', isUser, async (req, res) => {
     }
 })
 
-router.get('/users/userProfile/:email', async(req, res) => {
+router.get('/users/userProfile/:email', async (req, res) => {
     try {
         const email = req.params.email;
         const user = await getUserByEmail(email);
 
-        const userData = {
-            firstName: user.firstName, 
-            lastName: user.lastName, 
-            gender: user.gender, 
-            email: user.email, 
-            posted: user.posted, 
-            liked: user.liked
+        const recipes = await getAllRecipes();
+
+        const userCreated = []
+
+
+        for (let recipe of recipes) {
+            if (recipe.author.toString() == user._id.toString()) {
+                userCreated.push(recipe)
+            }
         }
 
-        res.json({ message: `Successfully accessed the profile page of the user ${userData.email}`, userData})
+        const userData = {
+            id: user._id,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            gender: user.gender,
+            email: user.email,
+            posted: userCreated,
+            liked: user.liked,
+            level: user.level,
+            rank: user.rank,
+            rating: user.rating
+        }
+
+        res.json({ message: `Successfully accessed the profile page of the user ${userData.email}`, userData })
     } catch (err) {
         console.log(err)
     }
-    
+
+})
+
+router.get('/users/getAll', async (req, res) => {
+    const users = await getAllUsers();
+
+    users.sort((a, b) => {
+        return b.rating - a.rating;
+    })
+
+    for (let user of users) {
+        user.hashedPassword = '';
+        user.seqAnswer = '';
+        user.seqQuestion = '';
+        user.totalRecipeDislikes = '';
+        user.totalRecipeLikes = '';
+        user.liked = [];
+        user.disliked = '';
+        user.posted = {};
+    }
+
+
+
+    res.json({ mesage: 'Success', users: users })
 })
 
 module.exports = router;

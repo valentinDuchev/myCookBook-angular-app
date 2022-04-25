@@ -40,7 +40,7 @@ async function login (email, password) {
         throw new Error ('Incorrect username or password');
     }
 
-    user.rating += 600;
+    user.rating += 10;
     if (user.rating <= 199) {
         user.rank = 1;
         user.level = 'Bronze'
