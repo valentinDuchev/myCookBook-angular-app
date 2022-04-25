@@ -53,12 +53,14 @@
                 <div class="column">
                     <div class="row2">
                         <div class="column">
-                            <p><button class="like-btn" (click)="like(recipe._id)">Like</button></p>
-                            <p> {{recipe.likes}} <i class="fa fa-thumbs-o-up like-count" aria-hidden="true"></i> </p>
+                            <!-- <p><button class="like-btn" (click)="like(recipe._id)">Like</button></p> -->
+                            <!-- <p> {{recipe.likes}} <i class="fa fa-thumbs-o-up like-count" aria-hidden="true"></i> </p> -->
+                            <p class='like-count-second'><i class="fa fa-thumbs-o-up like-count-second" aria-hidden="true"> {{recipe.likes}} </i> </p>
                         </div>
                         <div class="column">
-                            <p><button class="dislike-btn" (click)="dislike(recipe._id)">Dislike</button></p>
-                            <p> {{recipe.dislikes}} <i class="fa fa-thumbs-o-down " aria-hidden="true"></i></p>
+                            <!-- <p><button class="dislike-btn" (click)="dislike(recipe._id)">Dislike</button></p> -->
+                            <!-- <p> {{recipe.dislikes}} <i class="fa fa-thumbs-o-down " aria-hidden="true"></i></p> -->
+                            <p><i class="fa fa-thumbs-o-down dislike-count-second" aria-hidden="true">{{recipe.dislikes}} </i></p>
                         </div>
                     </div>
                 </div>

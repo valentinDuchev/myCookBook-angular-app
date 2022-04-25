@@ -380,3 +380,18 @@ body {
       .default{
           
       }
+
+      .like-count-second {
+          color: #3e8e41;
+          font-size: 40px;
+          margin-top: 38px;
+      }
+
+      
+      .dislike-count-second {
+          color: red;
+          font-size: 40px;
+          margin-top: 75px;
+          margin-left: -30px;
+
+      }

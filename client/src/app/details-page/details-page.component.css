@@ -316,11 +316,21 @@ span {
         margin-left: 200px; */
 
          position: relative;
-        left: 60px;
+        left: 10px;
+        right: 0px;
         top: -100px; 
         font-family:Arial, Helvetica, sans-serif;
         
     
+    }
+
+    .first>a {
+      margin-left: -50px;
+    }
+
+    .second >a {
+      margin-left: -50px;
+      
     }
   
     .column-details-macros {
@@ -555,6 +565,8 @@ span {
       font-size: 20px;
       font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     }
+
+    
 
 
 
