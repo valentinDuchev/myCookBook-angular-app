@@ -32,7 +32,7 @@ TODO
 
 --> Fix Recipes Disliked, Total Likes of Recipe, Total Dislikes of Recipes in different user page
 
---> Fix ingredients when create -> they must be in array
+<DONE> --> Fix ingredients when create -> they must be in array
 
 --------------------------------------------------------------------------------------------------------------------------------
 
@@ -50,3 +50,5 @@ TODO
 ---------------------------------------------------
  
  --> Fix reload in pagination 
+
+ --> Fix the ingredients array when edit 

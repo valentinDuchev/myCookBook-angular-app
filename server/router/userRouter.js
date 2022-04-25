@@ -139,6 +139,9 @@ router.get('/users/userProfile/:email', async (req, res) => {
             }
         }
 
+        console.log('user',user)
+
+
         const userData = {
             id: user._id,
             firstName: user.firstName,
@@ -149,8 +152,13 @@ router.get('/users/userProfile/:email', async (req, res) => {
             liked: user.liked,
             level: user.level,
             rank: user.rank,
-            rating: user.rating
+            rating: user.rating, 
+            disliked: user.disliked, 
+            totalRecipeDislikes: user.totalRecipeDislikes, 
+            totalRecipeLikes: user.totalRecipeLikes
         }
+
+        console.log('userdata', userData)
 
         res.json({ message: `Successfully accessed the profile page of the user ${userData.email}`, userData })
     } catch (err) {

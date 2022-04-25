@@ -4,12 +4,8 @@
             <div class="col-md-4">
                 <div class="profile-img">
 
-                    <img *ngIf="data.gender == 'Female'"
-                        src="../../assets/staticImages/female.jpg"
-                        alt="" />
-                    <img *ngIf="data.gender == 'Male'"
-                        src="../../assets/staticImages/male.jpg"
-                        alt="" />
+                    <img *ngIf="data.gender == 'Female'" src="../../assets/staticImages/female.jpg" alt="" />
+                    <img *ngIf="data.gender == 'Male'" src="../../assets/staticImages/male.jpg" alt="" />
 
                     <div class="file btn btn-lg btn-primary">
                         Change Photo
@@ -31,7 +27,7 @@
                     <h6>Rank: {{data.rank}} </h6>
                     <h6>Rating: {{data.rating}} </h6>
 
-                    
+
                 </div>
             </div>
 
@@ -41,11 +37,11 @@
                 <div class="profile-work">
                     <p>{{data.firstName}}'s activity</p>
                     <a>Recipes Created: {{data.posted.length}}</a><br />
-                    <a>Recipes Liked: {{data.liked.length}}</a><br />
+                    <a>Recipes Liked: {{data.liked}}</a><br />
                     <a>Recipes Disliked: {{data.disliked}}</a><br />
                     <a> Total Likes of Recipes: {{data.totalRecipeLikes}} </a><br />
                     <a> Total Dislikes of Recipes: {{data.totalRecipeDislikes}} </a><br />
-                    
+
                 </div>
             </div>
             <div class="col-md-8">
@@ -73,31 +69,7 @@
                 </div>
             </div>
 
-            <!-- <div class="col-md-4">
-                <div class="tab-content profile-tab" id="myTabContent">
-                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
 
-                        <h4>Liked</h4>
-
-                        <div *ngIf="data.liked.length == 0">
-                            This user hasn't liked anything yet
-                        </div>
-
-                        <div class="row" *ngFor="let recipe of data.liked">
-                            <div class="card text-center">
-                                <div class="card-body">
-                                    <h5 class="card-title">{{recipe.name}}</h5>
-                                    <a routerLink="/details/{{recipe._id}}" class="btn btn-primary">Details</a>
-                                </div>
-                                <div class="card-footer text-muted">
-                                    {{dateLiked}}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div> -->
         </div>
     </form>
 </div>

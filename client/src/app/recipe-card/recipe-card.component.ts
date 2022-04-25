@@ -10,7 +10,7 @@ import { Recipe } from '../models/Recipe'
 export class RecipeCardComponent implements OnInit {
 
   allRecipes!: any;
-  singleRecipe!: any;
+  singleRecipe: any = [];
 
   page: number = 1;
 

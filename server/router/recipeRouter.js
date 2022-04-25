@@ -24,11 +24,25 @@ router.post('/recipes', isUser, async (req, res) => { //TODO Add isUser middlewa
         const userData = parseJwt(token);
         const user = await getUserByEmail(userData.email);
 
+        let symbols = '';
+        let newIngredients = [];
+        for (let i = 0; i < req.body.ingredients[0].length; i++) {
+            if (req.body.ingredients[0][i].toString() != '\n' && i != req.body.ingredients[0].length - 1) {
+                symbols += req.body.ingredients[0][i].toString();
+                console.log(symbols)
+            } else if (req.body.ingredients[0][i].toString() == '\n' || i == req.body.ingredients[0].length - 1) {
+                newIngredients.push(symbols);
+                symbols = '';
+            }
+        }
+
+        console.log(newIngredients)
+
         const data = {
             name: req.body.name,
             dishType: req.body.dishType,
             imageUrl: req.body.imageUrl,
-            ingredients: req.body.ingredients,
+            ingredients: newIngredients,
             preparation: req.body.preparation,
             servings: req.body.servings,
             caloriesRecipe: req.body.caloriesRecipe,
@@ -43,6 +57,10 @@ router.post('/recipes', isUser, async (req, res) => { //TODO Add isUser middlewa
             author: user._id,
             details: req.body.details
         };
+
+        console.log(data.ingredients)
+
+        
 
         // console.log(req.headers)
 

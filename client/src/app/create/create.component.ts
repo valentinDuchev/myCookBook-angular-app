@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { flushMicrotasks } from '@angular/core/testing';
 import { Router } from '@angular/router';
 import { RecipeService } from '../services/recipeService/recipe.service';
 
@@ -50,7 +51,7 @@ export class CreateComponent implements OnInit {
       this.data.dishType = formData.form.controls.dishType.value;
       this.data.imageUrl = formData.form.controls.imageUrl.value;
       this.data.servings = formData.form.controls.servings.value;
-      this.data.ingredients = formData.form.controls.ingredients.value;
+      this.data.ingredients = formData.form.controls.ingredients.value.split('/n');
       this.data.preparation = formData.form.controls.preparation.value;
       this.data.caloriesRecipe = formData.form.controls.caloriesRecipe.value;
       this.data.carbsRecipe = formData.form.controls.carbsRecipe.value;
@@ -61,6 +62,9 @@ export class CreateComponent implements OnInit {
       this.data.proteinServing = formData.form.controls.proteinServing.value;
       this.data.details = formData.form.controls.details.value;
       this.data.proteinRecipe = formData.controls.proteinRecipe.value;
+
+      console.log(this.data.ingredients)
+      
 
       this.htmlForm.reset();
 
