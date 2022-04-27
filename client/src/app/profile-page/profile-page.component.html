@@ -59,8 +59,8 @@
 
                         <h4>Created</h4>
 
-                        <div *ngIf="data.posted.length == 0">
-                            This user has no posts yet
+                        <div *ngIf="data.posted.length == 0" style="text-align: center; font-size: 20px; font-family:Arial, Helvetica, sans-serif; color: red">
+                            This user has no posts yet...
                         </div>
 
                         <div class="row" *ngFor="let recipe of data.posted | paginate: { id: 'pagination-1', itemsPerPage: 4, currentPage: pagePosted }">
@@ -86,7 +86,7 @@
 
                         <h4>Liked</h4>
 
-                        <div *ngIf="data.liked.length == 0">
+                        <div *ngIf="data.liked.length == 0"  style="text-align: center; font-size: 20px; font-family:Arial, Helvetica, sans-serif; color: red">
                             This user hasn't liked anything yet
                         </div>
 

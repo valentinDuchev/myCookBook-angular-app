@@ -52,3 +52,9 @@ TODO
 <DONE> --> Fix reload in pagination 
 
 <DONE> --> Fix the ingredients array when edit 
+
+----------------------------------------------------
+
+--> Add better css to the messages "There are no available recipes/users and etc... "
+
+<DONE> --> Add 404 Not Found page

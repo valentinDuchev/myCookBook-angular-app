@@ -27,6 +27,7 @@ import { SearchedComponent } from './searched/searched.component';
 import { AllUsersComponent } from './all-users/all-users.component';
 import { EditComponent } from './edit/edit.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     SearchedComponent,
     AllUsersComponent,
     EditComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,
@@ -61,7 +63,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
       { path: 'profile/:email', component: ProfileUserComponent }, 
       { path: 'searched', component: SearchedComponent}, 
       { path: 'allUsers', component: AllUsersComponent }, 
-      { path: 'edit/:id', component: EditComponent, canActivate: [AuthGuard]}
+      { path: 'edit/:id', component: EditComponent, canActivate: [AuthGuard]},
+      { path: '**', component: NotFoundComponent }
       // { path: 'recipes/:id/like', component: , canActivate: [AuthGuard] }
     ]),
     HttpClientModule,
