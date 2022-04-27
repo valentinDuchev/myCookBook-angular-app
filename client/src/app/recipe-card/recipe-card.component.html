@@ -21,7 +21,7 @@
     </div>
 </div>
 
- <span *ngIf="singleRecipe.length == 0"  style="text-align: center; font-size: 20px; font-family:Arial, Helvetica, sans-serif; color: red">
+ <span *ngIf="singleRecipe.length == 0"  style="text-align: center; font-size: 20px; font-family:Arial, Helvetica, sans-serif; color: blue">
     There are no available recipes of this type.
 </span>
 <div id="container" *ngFor="let recipe of singleRecipe | paginate: { itemsPerPage: 6, currentPage: page}">
