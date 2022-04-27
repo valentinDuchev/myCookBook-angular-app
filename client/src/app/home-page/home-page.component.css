@@ -1,0 +1,28 @@
+.background-radial-gradient {
+    background-image: url('../../assets/staticImages/background.jpg');
+}
+
+.main-text {
+    margin-left: 0px;
+}
+
+.secondary-text {
+    margin-top: 70px;
+    margin-left: -80px;
+}
+
+.secondary-text a {
+    border: 2px solid green;
+    border-radius: 5px;
+    font-size: 17px;
+    background-color: green;
+    color: white;
+    padding: 3px;
+    margin-left: 7px;
+}
+
+.secondary-text p {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 20px;
+    color: blue;
+}

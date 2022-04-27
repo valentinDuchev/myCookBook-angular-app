@@ -75,7 +75,7 @@
                             </div>
                         </div>
 
-                        <pagination-controls id="pagination-1" (pageChange)="pagePosted = $event"></pagination-controls>
+                        <pagination-controls  *ngIf="data.posted.length != 0" id="pagination-1" (pageChange)="pagePosted = $event"></pagination-controls>
                     </div>
                 </div>
             </div>
@@ -102,7 +102,7 @@
                             </div>
                         </div>
 
-                        <pagination-controls id="pagination-2" (pageChange)="pageLiked = $event"></pagination-controls>
+                        <pagination-controls *ngIf="data.liked.length != 0" id="pagination-2" (pageChange)="pageLiked = $event"></pagination-controls>
 
                     </div>
                 </div>

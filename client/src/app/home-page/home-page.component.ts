@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 export class HomePageComponent implements OnInit {
 
 
+  user: any = localStorage.getItem('token');
 
   constructor(private router: Router
   ) { }

@@ -20,4 +20,4 @@
 
 </table>
 
-<pagination-controls (pageChange)="page = $event"></pagination-controls>
+<pagination-controls *ngIf="users.length != 0 " (pageChange)="page = $event"></pagination-controls>

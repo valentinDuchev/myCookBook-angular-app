@@ -1,1 +1,45 @@
-<p>home-page works!</p>
+<!-- Section: Design Block -->
+
+<body>
+    <section class="background-radial-gradient overflow-hidden">
+        
+
+        <div class="container px-4 py-5 px-md-5 text-center text-lg-start my-5">
+            <div class="row gx-lg-5 align-items-center mb-5">
+                <div class="col-lg-6 mb-5 mb-lg-0 main-text" style="z-index: 10">
+                    <h1 class="my-5 display-5 fw-bold ls-tight heading-cookfit" style="color: hsl(220, 100%, 43%)">Cook-Fit</h1>
+                    <h1 class="my-5 display-5 fw-bold ls-tight" style="color: hsl(220, 100%, 43%)">
+                        The Best Place <br />
+                        <h2 style="color: hsl(218, 100%, 41%)">for your recipes</h2>
+
+                    </h1>
+                    <h6 class="mb-4 opacity-70" style="color: hsl(219, 100%, 50%)">
+                        In Cook-Fit you can create your own recipes and collect ideas for recipes 
+                        from other users. With every recipe you create, and for every like you receive, 
+                        your rating increases. You can check the standings to see the ranking of you and 
+                        the other users. All recipes you like are being saved automatically in your account page.
+                    </h6>
+                </div>
+
+                <div class="col-lg-6 mb-5 mb-lg-0 position-relative">
+                    <div id="radius-shape-1" class="position-absolute rounded-circle shadow-5-strong"></div>
+                    <div id="radius-shape-2" class="position-absolute shadow-5-strong"></div>
+
+                    <div class="secondary-text">
+                        <p *ngIf="!user">Don't have an account yet? <a routerLink="register">Sign in</a>
+                        </p>
+                        <p *ngIf="!user">Already have an account?<a routerLink="login">Sign up</a></p>
+                        <p> Check the newest recipes: <a routerLink="catalog"> See all</a></p>
+                        <p>Check all users on Cook-Fit <a routerLink="allUsers">All Users</a></p>
+                    </div>
+
+                </div>
+
+                <div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Section: Design Block -->
+</body>

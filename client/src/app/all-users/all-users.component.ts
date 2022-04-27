@@ -17,6 +17,7 @@ export class AllUsersComponent implements OnInit {
   constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
+    this.users = []
     this.authService.getAllProfiles().subscribe(
       (res) => {
         this.users = res.users;
