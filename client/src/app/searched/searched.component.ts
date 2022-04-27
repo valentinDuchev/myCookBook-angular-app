@@ -20,6 +20,9 @@ export class SearchedComponent implements OnInit {
 
   constructor(private searchedService: SearchService) { }
 
+  pageRecipes: number = 1;
+  pageUsers: number = 1;
+
   ngOnInit(): void {
     this.recipes = [];
     this.users = [];

@@ -8,7 +8,7 @@
 
 
 
-        <div class="courses-container" *ngFor="let recipe of finalData.recipes">
+        <div class="courses-container" *ngFor="let recipe of finalData.recipes | paginate: { id: 'pagination-1', itemsPerPage: 5, currentPage: pageRecipes }">
             <div class="course">
                 <div class="course-preview">
                     <!-- <h6>Course-1</h6> -->
@@ -24,6 +24,9 @@
             </div>
         </div>
 
+        <pagination-controls  *ngIf="finalData.recipes.length != 0" id="pagination-1" (pageChange)="pageRecipes = $event"></pagination-controls>
+
+
 
 
     </div>
@@ -33,7 +36,7 @@
 
         <span *ngIf="users.length == 0"> There are no users with this criteria</span>
 
-        <div class="courses-container" *ngFor="let user of finalData.users">
+        <div class="courses-container" *ngFor="let user of finalData.users | paginate: { id: 'pagination-2', itemsPerPage: 5, currentPage: pageUsers }">
             <div class="course">
                 <div class="course-preview">
                     <img *ngIf="user.gender == 'Male'"
@@ -48,11 +51,13 @@
                     <!-- <h6>Course-1</h6> -->
                     <h4>{{user.firstName}} {{user.lastName}}</h4>
                     <h5>{{user.email}}</h5>
-                    <h6>Rank: </h6>
+                    <h6> Rating: {{user.rating}} Rank: {{user.rank}} Level: {{user.level}}</h6>
                     <a routerLink="/profile/{{user.email}}">Details</a>
                 </div>
             </div>
         </div>
+
+        <pagination-controls  *ngIf="finalData.users.length != 0" id="pagination-2" (pageChange)="pageUsers = $event"></pagination-controls>
 
 
     </div>

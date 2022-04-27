@@ -12,9 +12,9 @@ TODO
 
 <DONE> --> Add Edit Functionality for Author of the current recipe
 
---> Add html, css and etc to home and about page
+<DONE> --> Add html, css and etc to home and about page
 
---> Add better html+css to the footer
+<DONE> --> Add better html+css to the footer
 
 <DONE> --> Add Search Functionality
 
@@ -30,7 +30,7 @@ TODO
 
 <DONE> --> Add ranking and index for users 
 
---> Fix Recipes Disliked, Total Likes of Recipe, Total Dislikes of Recipes in different user page
+<DONE> --> Fix Recipes Disliked, Total Likes of Recipe, Total Dislikes of Recipes in different user page
 
 <DONE> --> Fix ingredients when create -> they must be in array
 
@@ -49,6 +49,6 @@ TODO
 
 ---------------------------------------------------
  
- --> Fix reload in pagination 
+<DONE> --> Fix reload in pagination 
 
- --> Fix the ingredients array when edit 
+<DONE> --> Fix the ingredients array when edit 
