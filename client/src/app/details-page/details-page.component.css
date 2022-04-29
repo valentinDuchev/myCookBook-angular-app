@@ -540,6 +540,7 @@ span {
       margin-right: 50px;
       width: 140px;
       margin-top: -220px;
+      margin-left: 120px;
     }
 
     .edit-delete-buttons> .delete-button {
@@ -554,14 +555,14 @@ span {
       color: green;
       margin-top: -60px;
       font-size: 20px;
-      margin-left: -180px;
+      margin-left: 140px;
       font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     }
 
     .edit-delete-buttons > .dislikes-count-over {
       color: rgb(249, 0, 0);
       margin-top: -45px;
-      margin-left: 200px;
+      margin-left: 350px;
       font-size: 20px;
       font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     }
