@@ -61,7 +61,7 @@
                                     <a routerLink="/details/{{recipe._id}}" class="btn btn-primary">Details</a>
                                 </div>
                                 <div class="card-footer text-muted">
-                                    {{date}}
+                                    {{recipe.dateCreated.substring(0, 10)}}
                                 </div>
                             </div>
                         </div>

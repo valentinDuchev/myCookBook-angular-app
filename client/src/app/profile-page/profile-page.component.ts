@@ -59,6 +59,14 @@ export class ProfilePageComponent implements OnInit {
           this.date = this.date.toLocaleDateString("en-US", options);
         }
 
+        this.data.posted = this.data.posted.sort((a: { dateCreated: number; }, b: { dateCreated: number; }) => {
+          return new Date(b.dateCreated).getTime() - new Date(a.dateCreated).getTime();
+        })
+
+        this.data.liked = this.data.liked.sort((a: { dateCreated: string | number | Date; }, b: { dateCreated: string | number | Date; }) => {
+          return new Date(b.dateCreated).getTime() - new Date(a.dateCreated).getTime();
+        })
+
         for (let recipe of this.data.liked) {
           const options = { year: 'numeric', month: 'long', day: 'numeric' };
           this.dateLiked = new Date(recipe.dateCreated);

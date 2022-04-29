@@ -57,6 +57,10 @@ export class ProfileUserComponent implements OnInit {
           this.date = this.date.toLocaleDateString("en-US", options);
         }
 
+        this.data.posted = this.data.posted.sort((a: { dateCreated: string | number | Date; }, b: { dateCreated: string | number | Date; }) => {
+          return new Date(b.dateCreated).getTime() - new Date(a.dateCreated).getTime();
+        })
+
         
       }
     )

@@ -285,39 +285,39 @@ router.get(`/recipes/:id/like`, isUser, async (req, res) => {
         author.totalRecipeLikes += 1;
 
         author.rating += 20;
-        if (user.rating <= 199) {
-            user.rank = 1;
-            user.level = 'Bronze'
-        } else if (user.rating > 199 && user.rating < 500) {
-            user.rank = 2;
-            user.level = 'Bronze'
-        } else if (user.rating > 499 && user.rating < 800) {
-            user.rank = 3;
-            user.level = 'Silver'
-        } else if (user.rating > 799 && user.rating < 1400) {
-            user.rank = 4;
-            user.level = 'Silver'
-        } else if (user.rating > 1399 && user.rating < 2100) {
-            user.rank = 5;
-            user.level = 'Silver'
-        } else if (user.rating > 2099 && user.rating < 3000) {
-            user.rank = 6;
-            user.level = 'Gold'
-        } else if (user.rating > 2999 && user.rating < 4500) {
-            user.rank = 7;
-            user.level = 'Gold'
-        } else if (user.rating > 4499 && user.rating < 7000) {
-            user.rank = 8;
-            user.level = 'Gold'
-        } else if (user.rating > 6999 && user.rating < 10500) {
-            user.rank = 9;
-            user.level = 'Platinum'
-        } else if (user.rating > 10499 && user.rating < 16000) {
-            user.rank = 10;
-            user.level = 'Platinum'
-        } else if (user.rating > 15999) {
-            user.rank = 11;
-            user.level = 'Diamond'
+        if (author.rating <= 199) {
+            author.rank = 1;
+            author.level = 'Bronze'
+        } else if (author.rating > 199 && author.rating < 500) {
+            author.rank = 2;
+            author.level = 'Bronze'
+        } else if (Number(author.rating) > 499 && Number(author.rating) < 800) {
+            author.rank = 3;
+            author.level = 'Silver'
+        } else if (author.rating > 799 && author.rating < 1400) {
+            author.rank = 4;
+            author.level = 'Silver'
+        } else if (author.rating > 1399 && author.rating < 2100) {
+            author.rank = 5;
+            author.level = 'Silver'
+        } else if (author.rating > 2099 && author.rating < 3000) {
+            author.rank = 6;
+            author.level = 'Gold'
+        } else if (author.rating > 2999 && author.rating < 4500) {
+            author.rank = 7;
+            author.level = 'Gold'
+        } else if (author.rating > 4499 && author.rating < 7000) {
+            author.rank = 8;
+            author.level = 'Gold'
+        } else if (author.rating > 6999 && author.rating < 10500) {
+            author.rank = 9;
+            author.level = 'Platinum'
+        } else if (author.rating > 10499 && author.rating < 16000) {
+            author.rank = 10;
+            author.level = 'Platinum'
+        } else if (author.rating > 15999) {
+            author.rank = 11;
+            author.level = 'Diamond'
         }
 
         await recipe.save()
@@ -359,39 +359,40 @@ router.get('/recipes/:id/dislike', isUser, async (req, res) => {
         user.disliked += 1;
         author.totalRecipeDislikes += 1;
         author.rating -= 10;
-        if (user.rating <= 199) {
-            user.rank = 1;
-            user.level = 'Bronze'
-        } else if (user.rating > 199 && user.rating < 500) {
-            user.rank = 2;
-            user.level = 'Bronze'
-        } else if (user.rating > 499 && user.rating < 800) {
-            user.rank = 3;
-            user.level = 'Silver'
-        } else if (user.rating > 799 && user.rating < 1400) {
-            user.rank = 4;
-            user.level = 'Silver'
-        } else if (user.rating > 1399 && user.rating < 2100) {
-            user.rank = 5;
-            user.level = 'Silver'
-        } else if (user.rating > 2099 && user.rating < 3000) {
-            user.rank = 6;
-            user.level = 'Gold'
-        } else if (user.rating > 2999 && user.rating < 4500) {
-            user.rank = 7;
-            user.level = 'Gold'
-        } else if (user.rating > 4499 && user.rating < 7000) {
-            user.rank = 8;
-            user.level = 'Gold'
-        } else if (user.rating > 6999 && user.rating < 10500) {
-            user.rank = 9;
-            user.level = 'Platinum'
-        } else if (user.rating > 10499 && user.rating < 16000) {
-            user.rank = 10;
-            user.level = 'Platinum'
-        } else if (user.rating > 15999) {
-            user.rank = 11;
-            user.level = 'Diamond'
+
+        if (author.rating <= 199) {
+            author.rank = 1;
+            author.level = 'Bronze'
+        } else if (author.rating > 199 && author.rating < 500) {
+            author.rank = 2;
+            author.level = 'Bronze'
+        } else if (author.rating > 499 && author.rating < 800) {
+            author.rank = 3;
+            author.level = 'Silver'
+        } else if (author.rating > 799 && author.rating < 1400) {
+            author.rank = 4;
+            author.level = 'Silver'
+        } else if (author.rating > 1399 && author.rating < 2100) {
+            author.rank = 5;
+            author.level = 'Silver'
+        } else if (author.rating > 2099 && author.rating < 3000) {
+            author.rank = 6;
+            author.level = 'Gold'
+        } else if (author.rating > 2999 && author.rating < 4500) {
+            author.rank = 7;
+            author.level = 'Gold'
+        } else if (author.rating > 4499 && author.rating < 7000) {
+            author.rank = 8;
+            author.level = 'Gold'
+        } else if (author.rating > 6999 && author.rating < 10500) {
+            author.rank = 9;
+            author.level = 'Platinum'
+        } else if (author.rating > 10499 && author.rating < 16000) {
+            author.rank = 10;
+            author.level = 'Platinum'
+        } else if (author.rating > 15999) {
+            author.rank = 11;
+            author.level = 'Diamond'
         }
 
         await recipe.save();
