@@ -7,7 +7,7 @@ const secret = process.env.SECRET;
 
 function generateAccessToken (email, firstName, lastName, gender) {
     return jwt.sign({ email, firstName, lastName, gender }, secret, {
-        expiresIn: "1d"
+        expiresIn: "16h"
     });
 };
 
